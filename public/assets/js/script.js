@@ -51,7 +51,7 @@ let dices = [];
 let selectDices = [];
 let keepDice = [];
 
-//fonctions
+//initialize 5 nombres random dans chaque dés 
 let dicesRandomNumber = () => { 
     for (let index = 0; index < 5; index++) {
         let dice = Math.floor(Math.random() * 6) + 1;
@@ -60,7 +60,7 @@ let dicesRandomNumber = () => {
     return dices
 };
 
-
+// fonction qui permet d'afficher les 5 dés a l'écran et de pouvoir les relancer
 let displayDices = () => {
     dices = [];
     const newDices = dicesRandomNumber()
@@ -70,39 +70,35 @@ let displayDices = () => {
     }
 };
 
-
+// listener du bouton relancez (les 5 dés)
 btnStart.addEventListener("click", displayDices);
 
-let clickUser = 1;
+/* fonction qui permet de séléctionner un dé le stocker dans selectDices ou deselectionner le dé indépendamment et 
+retirer sa valeur de la variable selectDices attribuer une couleur quand selectionner et la retirer*/
 let selectDiceClick = () => {
     diceHtml.forEach((dice) => {
-    dice.addEventListener("click", (event) => {
-    event.target.classList.add("text-bg-danger");
-    console.log(clickUser);
-    selectDices.push(dice.innerHTML)
-    console.log(selectDices);
+    let clickUser = 0;
+    dice.addEventListener("click", () => {
+    dice.classList.add("text-bg-danger");
+    clickUser++;
     if(clickUser%2 == 1 ) {
-        clickUser++
-        console.log(clickUser);
-        console.log("impair");
+        selectDices.push(dice.innerHTML)
+        console.log(selectDices, "cc");
         return selectDices;
     } else if (clickUser%2 == 0) {
-        clickUser++
-        console.log(clickUser);
-        console.log("pair");
-        event.target.classList.remove("text-bg-danger");
-        
-    }
+        dice.classList.remove("text-bg-danger");
+        let lastDice = selectDices.indexOf(dice.innerHTML);
+        let removeDice = selectDices.splice(lastDice,1);
+        console.log(selectDices,"aa");
+    };
         });
     });
 };
 selectDiceClick()
 
 let keepSelectDice = () => {
-    keepDice = selectDiceClick()
-    
+    keepDice = selectDices
 }
-
 
 // Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
 
