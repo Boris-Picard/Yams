@@ -19,11 +19,10 @@
 
 //Thibaud
 
-
-
-
-
 //variables
+let selectDices = [];
+let keepDice = [] ;
+
 
 
 
@@ -33,8 +32,24 @@
 //fonctions
 
 
+// L'utilisateur peut garder un nombre de dés entre 1 et 5 :
 
+selectDices = [3,5] ;
 
+// Stocker le résultat des dés que l'utilisateur va garder : 
+let keepDices = () => {
+    for (let i = 0; i < selectDices.length; i++) {
+        keepDice[i] = selectDices[i]
+    }
+    return keepDice;
+}
+console.log(keepDices());
+
+// Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
+
+let remainingDices = 5 - selectDices.length ;
+
+console.log(remainingDices);
 
 
 
