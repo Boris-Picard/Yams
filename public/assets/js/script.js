@@ -45,17 +45,28 @@
 
 
 //variables
-let des = document.querySelectorAll(".des");
+let diceHtml = document.querySelectorAll(".diceHtml");
 const btnStart = document.querySelector(".btnStart");
-
+const dices = [];
 
 //fonctions
-let desRandomNumber = () => {
-    des.forEach((de) => {
-        de.innerHTML = [Math.floor(Math.random() * 6) + 1];
-    })
+let dicesRandomNumber = () => {
+    for (let index = 0; index < 5; index++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        dices.push(dice);
+    };
+};
+console.log(dices);
+dicesRandomNumber();
+
+let displayDices = () => {
+    let i = 0;
+    diceHtml.forEach((de) => {
+        de.innerHTML = dices[i];
+        i++;
+    });
 };
 
 
-btnStart.addEventListener("click", desRandomNumber);
+btnStart.addEventListener("click", displayDices);
 
