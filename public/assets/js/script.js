@@ -73,32 +73,36 @@ let displayDices = () => {
 
 btnStart.addEventListener("click", displayDices);
 
-
-let keepDiceClick = () => {
+let clickUser = 1;
+let selectDiceClick = () => {
     diceHtml.forEach((dice) => {
     dice.addEventListener("click", (event) => {
     event.target.classList.add("text-bg-danger");
+    console.log(clickUser);
     selectDices.push(dice.innerHTML)
     console.log(selectDices);
-        });
+    if(clickUser%2 == 1 ) {
+        clickUser++
+        console.log(clickUser);
+        console.log("impair");
         return selectDices;
+    } else if (clickUser%2 == 0) {
+        clickUser++
+        console.log(clickUser);
+        console.log("pair");
+        event.target.classList.remove("text-bg-danger");
+        
+    }
+        });
     });
 };
-keepDiceClick()
+selectDiceClick()
 
+let keepSelectDice = () => {
+    keepDice = selectDiceClick()
+    
+}
 
-// L'utilisateur peut garder un nombre de dés entre 1 et 5 :
-
-// selectDices = [3,5];
-
-// Stocker le résultat des dés que l'utilisateur va garder : 
-// let keepDices = () => {
-//     for (let i = 0; i < selectDices.length; i++) {
-//         keepDice[i] = selectDices[i]
-//     }
-//     return keepDice;
-// }
-// console.log(keepDices());
 
 // Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
 
