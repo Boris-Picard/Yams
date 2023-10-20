@@ -62,7 +62,7 @@ let threeDices = [] ;
 let twoDices = [] ;
 let sameDices = [] ;
 let getKeepDice = [] ;
-let test ;
+let brelan ;
 
 
 
@@ -75,7 +75,7 @@ let test ;
 // L'utilisateur peut garder un nombre de dés entre 1 et 5 :
 
 /////////////////////////Valeurs en dur ://///////////////////////////
- selectDices = [1,1,1,] ;
+selectDices = [1,1,1,5,5] ;
 
 // Stocker le résultat des dés que l'utilisateur va garder : 
 let keepDices = () => {
@@ -106,18 +106,22 @@ let remainingDices = 5 - selectDices.length ;
 
 for (let index = 0; index < getKeepDice.length; index++) {
     let numberOfFive = getKeepDice.filter(number => number === 1);
-    if ( numberOfFive.length ==3){
-        threeDices = getKeepDice[index]*3  
-     }
-
+    let sumOfNumber = numberOfFive.length;
+    console.log(sumOfNumber);
+    
+    if (sumOfNumber == 3) {
+    
+    } else {
+        console.log('Pas de 5 dans getKeepDice.');
+    }
     
 
-    console.log(numberOfFive);
+    
 
     }
 
     // console.log(sameDices,"valeur du tableau sameDices");
-     console.log(threeDices, "log threeDices");
+    //  console.log(threeDices, "log threeDices");
     // console.log(twoDices, "log twoDices");
 
 
