@@ -75,12 +75,6 @@ let getSumDices  = () => {
 //affichage du resultat du calcul des valeurs de sumDice
 console.log(getSumDices());
 
-
-// for (let index = 0; index < array.length; index++) {
-//     const element = array[index];
-    
-// }
-
 //afficher chaques valeurs individuellement:
 for (let i = 0; i < dices.length; i++) {
     const val1 = dices[i];
@@ -88,46 +82,88 @@ for (let i = 0; i < dices.length; i++) {
 }
 
 //chercher si un élément est présent dans un tableau:
+let valeur1 = 1;
+let valeur2 = 2;
+let valeur3 = 3;
 
-// let elem1 = 1;
-// for (let i=0; i<sumDice.length;i++){
-//     if(elem1 === dices[i]){
-//         console.log('élément contenu');
-//     }
-// }
-
-let value = 1;
-let isFound = getSumDices(value);
-console.log(isFound,"l");
-
-
-
+const selectDices = [1,1,3,3,4]
+const operation = "total1"
 //Teddy
+const calculatePoints=(selectDices,operation)=>{
+switch(operation){
+// pour le cumul des 1
+    case "total1":
+        if (selectDices.includes(1)){
+            console.log("présence de :" + 1);
+            } else {
+            console.log("absence de 1");
+            }
+        break;
+// pour le cumul des 2
+    case "total2":
+        if (selectDices.includes(2)){
+            console.log("présence de :" + 2);
+            } else {
+            console.log("absence de 2");
+            }
+        break;
+// pour le cumul des 3
+    case "total3":
+        if (selectDices.includes(3)){
+            console.log("présence de :" + 3);
+            } else {
+            console.log("absence de 3");
+            }
+        break;
+// pour le cumul des 4
+    case "total4":
+        if (selectDices.includes(4)){
+            console.log("présence de :" + 4);
+            } else {
+            console.log("absence de 4");
+            }
+    break;
+// pour le cumul des 5
+    case "total5":
+        if (selectDices.includes(5)){
+            console.log("présence de :" + 5);
+            } else {
+            console.log("absence de 5");
+            }
+    break;
+// pour le cumul des 6
+    case "total6":
+        if (selectDices.includes(6)){
+            console.log("présence de :" + 6);
+            } else {
+            console.log("absence de 6");
+            }
+    break;
+    case "brelan":
+        
+    break;
+    case "carre":
 
-// switch(dices[i]){
-//     case 1:
-//         if(dices[i]==dices[i])
-//         console.log(dices[i]);
-//         break;
-//     case 2:
+    break;
+    case "petiteS":
 
-//         break;
-//     case 3:
+    break;
+    case "grandeS":
 
-//         break;
-//     case 4:
+    break;
+    case "yams":
 
-//     break;
-//     case 5:
+    break;
+    case"chance":
 
-//     break;
-//     case 6:
+    break;
+    default:
+    console.log("dead");
+    break;
+}
+}
 
-//     break;
-
-// }
-
-
+calculatePoints([1,1,3,3,4],"total1")
 
 
 
