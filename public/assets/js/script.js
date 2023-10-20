@@ -47,7 +47,8 @@
 //variables
 let diceHtml = document.querySelectorAll(".diceHtml");        
 const btnStart = document.querySelector(".btnStart");
-const btnValid = document.querySelector(".btnValid")
+const btnRestart = document.querySelector(".btnRestart");
+const btnValid = document.querySelector(".btnValid");
 let dices = [];
 let selectDices = [];
 // let keepDice = [];
@@ -57,6 +58,7 @@ let dicesRandomNumber = () => {
     for (let index = 0; index < 5; index++) {
         let dice = Math.floor(Math.random() * 6) + 1;
         dices.push(dice);
+        console.log(dices);
     };
     return dices
 };
@@ -64,10 +66,14 @@ let dicesRandomNumber = () => {
 // fonction qui permet d'afficher les 5 dés a l'écran et de pouvoir les relancer
 let displayDices = () => {
     dices = [];
+
+
+    // .length
     const newDices = dicesRandomNumber()
     for(i = 0;i < newDices.length ; i++){
         diceHtml[i].innerHTML = newDices[i];
-    }
+        btnStart.classList.add("d-none")
+    };
 };
 
 // listener du bouton relancez (les 5 dés)
@@ -81,11 +87,16 @@ let selectDiceClick = () => {
         dice.addEventListener("click", () => {
             clickUser++;
             if(clickUser%2 == 1) {
-                selectDices.push(dice.innerHTML)
+                let lastClickedDice = dices.indexOf(dice.innerHTML);
+                let removeLastDice = dices.splice(lastClickedDice,1);
+                selectDices.push(dice.innerHTML);
+                console.log(selectDices);
                 return selectDices;
             } else if (clickUser%2 == 0) {
                 let lastDice = selectDices.indexOf(dice.innerHTML);
                 let removeDice = selectDices.splice(lastDice,1);
+                dices.push(dice.innerHTML);
+                console.log(dices);
             };
         });
     });
@@ -94,9 +105,9 @@ let selectDiceClick = () => {
 let displaySelectDices = () => {
     selectDiceClick();
     diceHtml.forEach((dice) => {
-        let clicked = 0
+        let clicked = 0;
         dice.addEventListener("click",() => {
-            clicked++
+            clicked++;
             if(clicked%2 == 1) {
                 dice.classList.add("text-bg-danger");
             } else if (clicked%2 == 0) {
@@ -108,17 +119,11 @@ let displaySelectDices = () => {
 
 displaySelectDices()
 
-let keepSelectDice = () => {
-    btnValid.addEventListener("click", () => {
-        if ("click") {
-            let remainingDices = 5 - selectDices.length ;
-            console.log(selectDices);
-            displayDices() - remainingDices
-        };
-    });
-};
+let restartDice = () => {
+    
+}
 
-keepSelectDice() 
+btnRestart.addEventListener("click", restartDice)
 
 // Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
 
