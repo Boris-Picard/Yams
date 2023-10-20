@@ -47,9 +47,10 @@
 //variables
 let diceHtml = document.querySelectorAll(".diceHtml");        
 const btnStart = document.querySelector(".btnStart");
+const btnValid = document.querySelector(".btnValid")
 let dices = [];
 let selectDices = [];
-let keepDice = [];
+// let keepDice = [];
 
 //initialize 5 nombres random dans chaque dés 
 let dicesRandomNumber = () => { 
@@ -64,7 +65,6 @@ let dicesRandomNumber = () => {
 let displayDices = () => {
     dices = [];
     const newDices = dicesRandomNumber()
-    console.log(newDices.length);
     for(i = 0;i < newDices.length ; i++){
         diceHtml[i].innerHTML = newDices[i];
     }
@@ -77,28 +77,48 @@ btnStart.addEventListener("click", displayDices);
 retirer sa valeur de la variable selectDices attribuer une couleur quand selectionner et la retirer*/
 let selectDiceClick = () => {
     diceHtml.forEach((dice) => {
-    let clickUser = 0;
-    dice.addEventListener("click", () => {
-    dice.classList.add("text-bg-danger");
-    clickUser++;
-    if(clickUser%2 == 1 ) {
-        selectDices.push(dice.innerHTML)
-        console.log(selectDices, "cc");
-        return selectDices;
-    } else if (clickUser%2 == 0) {
-        dice.classList.remove("text-bg-danger");
-        let lastDice = selectDices.indexOf(dice.innerHTML);
-        let removeDice = selectDices.splice(lastDice,1);
-        console.log(selectDices,"aa");
-    };
+        let clickUser = 0;
+        dice.addEventListener("click", () => {
+            clickUser++;
+            if(clickUser%2 == 1) {
+                selectDices.push(dice.innerHTML)
+                return selectDices;
+            } else if (clickUser%2 == 0) {
+                let lastDice = selectDices.indexOf(dice.innerHTML);
+                let removeDice = selectDices.splice(lastDice,1);
+            };
         });
     });
 };
-selectDiceClick()
+// fonction qui gére l'affichage
+let displaySelectDices = () => {
+    selectDiceClick();
+    diceHtml.forEach((dice) => {
+        let clicked = 0
+        dice.addEventListener("click",() => {
+            clicked++
+            if(clicked%2 == 1) {
+                dice.classList.add("text-bg-danger");
+            } else if (clicked%2 == 0) {
+                dice.classList.remove("text-bg-danger");
+            };
+        });
+    });
+};
+
+displaySelectDices()
 
 let keepSelectDice = () => {
-    keepDice = selectDices
-}
+    btnValid.addEventListener("click", () => {
+        if ("click") {
+            let remainingDices = 5 - selectDices.length ;
+            console.log(selectDices);
+            displayDices() - remainingDices
+        };
+    });
+};
+
+keepSelectDice() 
 
 // Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
 
