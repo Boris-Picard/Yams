@@ -24,4 +24,110 @@
 
 
 
-/* Boris
+/* Boris */
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #B08968 !important;
+}
+
+header {
+    background-color: #7F5539;
+    height: 150px;
+}
+
+.headerBloc {
+    background-color: #DDB892;
+    height: 10vh;
+}
+
+.firstDiceContainer {
+    background-color: #DDB892;
+    height: 11vh;
+}
+
+.secondDiceContainer {
+    background-color: #DDB892;
+    height: 11vh;
+    position: absolute;
+    top: 475px;
+}
+
+.btnStart {
+    background-color: #7F5539 !important;
+    font-weight: bold !important;
+}
+
+.btnStart:hover {
+    background-color: #DDB892 !important;
+    font-weight: bold !important;
+}
+
+.btnRestart {
+    background-color: #7F5539 !important;
+    font-weight: bold !important;
+}
+
+.btnRestart:hover {
+    background-color: #DDB892 !important;
+    font-weight: bold !important;
+}
+
+.table {
+    background-color: #DDB892 !important;
+    font-weight: bold !important;
+}
+
+.diceImg1 {
+    width: 75px;
+}
+
+.diceImg6 {
+    width: 75px;
+}
+
+.diceImgBoard1 {
+    width: 55px;
+}
+.diceImgBoard2 {
+    width: 55px;
+}
+.diceImgBoard3 {
+    width: 55px;
+}
+.diceImgBoard4 {
+    width: 55px;
+}
+.diceImgBoard5 {
+    width: 55px;
+}
+
+.diceImgBoard6 {
+    width: 55px;
+}
+
+.active {
+    width: 40px;
+}
+
+@media all and (max-width: 600px) {
+    .diceImg1 {
+        margin-bottom: 80px;
+        width: 40px;
+    }
+    .diceImg6 {
+        margin-bottom: 80px;
+        width: 40px;
+    }
+    .headerBloc {
+        height: 14vh;
+    }
+    h1 {
+        margin-bottom: 80px !important;
+        font-size: 18px !important;
+    }
+    .secondDiceContainer {
+        position: relative;
+        top: 0;
+    }
+}

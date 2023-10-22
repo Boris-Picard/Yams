@@ -2,9 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/assets/css/style.css">
     <link rel="stylesheet" href="./public/assets/framework/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yams</title>
 </head>
 <body>
@@ -12,52 +15,61 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center">Le yams</h1>
+                    
+                </div>
+                <div class="headerBloc w-50 text-center mx-auto my-3 rounded-5">
+                    <div class="text-center d-flex justify-content-between align-items-center my-3">
+                        <img src="./public/assets/img/dice1.png" alt="dice1" class="diceImg1">
+                        <h1>Jeu du Yams</h1>
+                        <img src="./public/assets/img/dice6.png" alt="dice6" class="diceImg6">
+                    </div>
                 </div>
             </div>
         </div>
     </header>
     <main>
-        <div class="container">
-            <div class="row text-center flex-row">
-                <div class="col-12 my-5">
-                    <button class="btn btn-outline-dark diceHtml">
-                    </button>
-                    <button class="btn btn-outline-dark diceHtml">
-                    </button>
-                    <button class="btn btn-outline-dark diceHtml">
-                    </button>
-                    <button class="btn btn-outline-dark diceHtml">
-                    </button>
-                    <button class="btn btn-outline-dark diceHtml">
-                    </button>
-                </div> 
-                <div class="col-12">
-                    <button class="btn btn-outline-danger btnStart">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-12 my-5 text-center">
+                    <button class="btn btnStart">
                         Commencer la partie
                     </button>
-                </div>
-                <div class="col-12 my-2">
-                    <button class="btn btn-outline-danger btnRestart">
+                    <button class="btn btnRestart d-flex d-none mx-auto">
                         Relancer
-                    </button>
-                    <button class="btn btn-outline-info btnValid">
-                        Valider
                     </button>
                 </div>
             </div>
-        </div>        
-    </main>
-        <!-- Thibaud tableau  -->
-        <div class="container ">
-            <div class="row text-center flex-row">
-                <div class="col-12 my-5">
-                    <table class="table table-striped-columns">
-                        <thead>
-                            <tr>
-                                <caption>Tableau des scores :</caption>
-                            </tr>
-                        </thead>
+            <div class="row text-center row-cols-2">
+                <div class="col-8 col-md-4 my-5 firstDiceContainer rounded-5 d-flex align-items-center justify-content-center mx-5 imgDice">
+                    <!-- <button class="btn btn-outline-dark diceHtml">
+                    </button>
+                    <button class="btn btn-outline-dark diceHtml">
+                    </button>
+                    <button class="btn btn-outline-dark diceHtml">
+                    </button>
+                    <button class="btn btn-outline-dark diceHtml">
+                    </button>
+                    <button class="btn btn-outline-dark diceHtml">
+                    </button> -->
+                    <img src="./public/assets/img/dice1.png" alt="dice1" class="diceImgBoard1 diceHtml m-1">
+                    <img src="./public/assets/img/dice2.png" alt="dice2" class="diceImgBoard2 diceHtml m-1">
+                    <img src="./public/assets/img/dice3.png" alt="dice3" class="diceImgBoard3 diceHtml m-1">
+                    <img src="./public/assets/img/dice4.png" alt="dice4" class="diceImgBoard4 diceHtml m-1">
+                    <img src="./public/assets/img/dice5.png" alt="dice5" class="diceImgBoard5 diceHtml m-1">
+                    <img src="./public/assets/img/dice6.png" alt="dice6" class="diceImgBoard6 diceHtml m-1">
+                </div> 
+                <div class="col-8 col-md-4 my-5 secondDiceContainer rounded-5 d-flex align-items-center justify-content-center mx-5">
+                    <!-- <img src="./public/assets/img/dice1.png" alt="dice1" class="diceImgBoard1 diceHtml d-none m-1">
+                    <img src="./public/assets/img/dice2.png" alt="dice2" class="diceImgBoard2 diceHtml d-none m-1">
+                    <img src="./public/assets/img/dice3.png" alt="dice3" class="diceImgBoard3 diceHtml d-none m-1">
+                    <img src="./public/assets/img/dice4.png" alt="dice4" class="diceImgBoard4 diceHtml d-none m-1">
+                    <img src="./public/assets/img/dice5.png" alt="dice5" class="diceImgBoard5 diceHtml d-none m-1">
+                    <img src="./public/assets/img/dice6.png" alt="dice6" class="diceImgBoard6 diceHtml d-none m-1"> -->
+                </div>
+                
+                <!-- Thibaud tableau  -->
+                <div class="col-12 col-md-7 my-5">
+                    <table class="table table-warning table-sm table-striped-columns table-hover">
                         <tbody>
                             <tr>
                                 <td>Calcul des points par joueurs :</td>
@@ -139,28 +151,12 @@
                             </tr>
                         </tfoot>
                     </table>
+                    
                 </div> 
-                <div class="col-12">
-                
-                </div>
             </div>
         </div>        
-
-
-
-
-        
-
-
-
-
-
-
-
-        
     </main>
     <footer>
-        
     </footer>
     <script src="./public/assets/js/script.js"></script>
     <script src="./public/assets/framework/bootstrap.bundle.min.js"></script>
