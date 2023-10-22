@@ -86,10 +86,11 @@ let remainingDices = 5 - selectDices.length ;
 for (let index = 0; index < getKeepDice.length; index++) {
     const numberIsOk = getKeepDice[index];
 
-    // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau :
+    // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau. .filter créer un nouveau tableau c'est sur lui que l'on effectue la recherche. Ce tableau est créer avec tous les éléments qui renvoi "true" lors .filter :
+    
     const howMuchOfNumber = getKeepDice.filter(dice =>dice === numberIsOk).length;
 
-    // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan" :
+    // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
     if (howMuchOfNumber >= 3) {
         const brelan = numberIsOk*3;
         // console.log(brelan);
@@ -104,7 +105,7 @@ for (let index = 0; index < getKeepDice.length; index++) {
 for (let index = 0; index < getKeepDice.length; index++) {
     const squareIsOk = getKeepDice[index];
     // console.log(squareIsOk,"log de squareIsOk");
-    const squareHowMuchOfNumber = getKeepDice.filter(dice =>dice === squareIsOk).length;
+    const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
     // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
     if (squareHowMuchOfNumber >= 4) {
         const square =squareIsOk * 4 ;
