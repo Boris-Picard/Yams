@@ -1,135 +1,67 @@
-//Teddy 
-
-
-
-
-
-//variables
-
-
-
-
-
-//fonctions
-
-
-
-
-
-
-//Thibaud
-
-
-
-
-
-//variables
-
-
-
-
-
-
-//fonctions
-
-
-
-
-
-
-
-
-
-
-//Boris
-
-
-//variables
-let diceHtml = document.querySelectorAll(".diceHtml");        
+const diceHtml = document.querySelectorAll(".diceHtml");     
 const btnStart = document.querySelector(".btnStart");
 const btnRestart = document.querySelector(".btnRestart");
 const btnValid = document.querySelector(".btnValid");
 let dices = [];
 let selectDices = [];
-// let keepDice = [];
 
-//initialize 5 nombres random dans chaque dés 
-let dicesRandomNumber = () => { 
+
+let randomDicesNumber = () => {
     for (let index = 0; index < 5; index++) {
-        let dice = Math.floor(Math.random() * 6) + 1;
-        dices.push(dice);
+        dices.push(Math.floor(Math.random() * 6) + 1);
         console.log(dices);
     };
     return dices
 };
 
-// fonction qui permet d'afficher les 5 dés a l'écran et de pouvoir les relancer
-let displayDices = () => {
-    dices = [];
-
-
-    // .length
-    const newDices = dicesRandomNumber()
-    for(i = 0;i < newDices.length ; i++){
-        diceHtml[i].innerHTML = newDices[i];
+let displayRandomDicesNumber = () => {
+    randomDicesNumber();
+    for (let index = 0; index < 5; index++) {
+        diceHtml[index].innerHTML = dices[index];
         btnStart.classList.add("d-none")
     };
 };
 
-// listener du bouton relancez (les 5 dés)
-btnStart.addEventListener("click", displayDices);
+btnStart.addEventListener("click", displayRandomDicesNumber);
 
-/* fonction qui permet de séléctionner un dé le stocker dans selectDices ou deselectionner le dé indépendamment et 
-retirer sa valeur de la variable selectDices attribuer une couleur quand selectionner et la retirer*/
-let selectDiceClick = () => {
-    diceHtml.forEach((dice) => {
-        let clickUser = 0;
+/* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
+parseint permet d'extraire le nombre a l'intérieur du dé sur lequel l'user clique qui avec innerhtml était un string et re devient un nombre
+et donc de faire marcher la méthode indexOf*/
+let getNumberActiveDice = () => {
+    diceHtml.forEach((dice, index) => {
         dice.addEventListener("click", () => {
-            clickUser++;
-            if(clickUser%2 == 1) {
-                let lastClickedDice = dices.indexOf(dice.innerHTML);
-                let removeLastDice = dices.splice(lastClickedDice,1);
-                selectDices.push(dice.innerHTML);
-                console.log(selectDices);
+            dice.classList.toggle("active");
+            let clickArrayNumber = parseInt(dice.innerHTML);
+            let indexInDices = dices.indexOf(clickArrayNumber);
+            let indexInSelectDices = selectDices.indexOf(clickArrayNumber);
+            if(dice.classList.contains("active")) {
+                dices.splice(indexInDices, 1);
+                selectDices.push(clickArrayNumber);
                 return selectDices;
-            } else if (clickUser%2 == 0) {
-                let lastDice = selectDices.indexOf(dice.innerHTML);
-                let removeDice = selectDices.splice(lastDice,1);
-                dices.push(dice.innerHTML);
-                console.log(dices);
-            };
-        });
-    });
-};
-// fonction qui gére l'affichage
-let displaySelectDices = () => {
-    selectDiceClick();
-    diceHtml.forEach((dice) => {
-        let clicked = 0;
-        dice.addEventListener("click",() => {
-            clicked++;
-            if(clicked%2 == 1) {
-                dice.classList.add("text-bg-danger");
-            } else if (clicked%2 == 0) {
-                dice.classList.remove("text-bg-danger");
+            } else {
+                selectDices.splice(indexInSelectDices, 1);
+                dices.push(clickArrayNumber);
+                return dices;
             };
         });
     });
 };
 
-displaySelectDices()
 
-let restartDice = () => {
-    
-}
-
-btnRestart.addEventListener("click", restartDice)
-
-// Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
-
-// let remainingDices = 5 - selectDices.length ;
-
-// console.log(remainingDices);
+getNumberActiveDice()
 
 
+//fonction de relance des dés
+let restartDices = () => {
+    dices = [];
+    diceHtml.forEach((dice, index) => {
+        if(!dice.classList.contains("active")) {
+            let diceValue = Math.floor(Math.random() * 6) + 1;
+            dices[index] = diceValue;
+            diceHtml[index].innerHTML = dices[index];
+        };
+    });
+    return selectDices;
+};
 
+btnRestart.addEventListener("click",  restartDices);
