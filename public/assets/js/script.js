@@ -57,66 +57,54 @@ btnStart.addEventListener("click", displayDices);
 //variables
 let selectDices = [];
 let keepDice = [] ;
-let dicesSameValues = [] ;
-let threeDices = [] ;
-let twoDices = [] ;
-let sameDices = [] ;
 let getKeepDice = [] ;
 let brelan ;
 
-
-
-
-
-
 //fonctions
-
-
 // L'utilisateur peut garder un nombre de dés entre 1 et 5 :
 
 /////////////////////////Valeurs en dur ://///////////////////////////
 selectDices = [2,2,2,3] ;
 
-// Stocker le résultat des dés que l'utilisateur va garder : 
+// Stocker le résultat des dés que l'utilisateur va garder dans une variable: 
 let keepDices = () => {
     for (let i = 0; i < selectDices.length; i++) {
         keepDice[i] = selectDices[i]
     }
     return keepDice;
 }
-
 getKeepDice = keepDices() ;
 console.log(getKeepDice, "variable retour de la fonction keepDices");
 
 // Savoir combien de dés il nous reste en fonction du nombre de dés gardés :
-
 let remainingDices = 5 - selectDices.length ;
-
 // console.log(remainingDices);
 
 // ============================Brelan==========================================
-
 // Brelan : Cumul des 3 identiques :
 
-
 // On parcours le tableau avec une boucle for :
-for (let index = 0; index < getKeepDice.length; index++) {
-    const numberIsOk = getKeepDice[index];
+const findBrelan = () => {
+    for (let index = 0; index < getKeepDice.length; index++) {
+        const numberIsOk = getKeepDice[index];
+        // console.log(numberIsOk,"log de numberIsOk");
 
-    // console.log(numberIsOk,"log de numberIsOk");
+        // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau :
+        const howMuchOfNumber = getKeepDice.filter(dice =>dice === numberIsOk).length;
+        // console.log(howMuchOfNumber,"log howMuchOfNumber");
 
-    // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau :
-    const howMuchOfNumber = getKeepDice.filter(dice =>dice === numberIsOk).length;
-    // console.log(howMuchOfNumber,"log howMuchOfNumber");
-
-    // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan" :
-    if (howMuchOfNumber >= 3) {
-        const brelan = numberIsOk*3;
-        console.log(brelan);
-        console.log("Vous avez un brelan");
-        break;
+        // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan" :
+        if (howMuchOfNumber >= 3) {
+            const brelan = numberIsOk*3;
+            console.log(brelan);
+            console.log("Vous avez un brelan");
+            break;
+        }
+        return brelan ;
     }
 }
+const getBrelan = findBrelan();
+console.log(getBrelan);
 
 // Cumul la valeur des dés :
 let getSumDices  = () => {
