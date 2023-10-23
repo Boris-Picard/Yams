@@ -3,6 +3,7 @@ const btnStart = document.querySelector(".btnStart");
 const btnRestart = document.querySelector(".btnRestart");
 const roundCounterHtml = document.querySelector(".roundCounterHtml");
 const totalEnding = document.getElementById("totalEnding");
+const tableResult = document.querySelector(".tableResult");
 let dices = [];
 let selectDices = [];
 let roundCounter = 0;
@@ -207,7 +208,32 @@ let calculatePoints=(selectDices,operation)=>{
             }
         break;
         case "yams":
-    
+            const yams = document.getElementById("yams")
+            let pointsOfYams = 0;
+
+            // Création d'un tableau pour compter le nombre de fois où l'on va avoir une valeur :
+            const counterOfYams = [];
+
+            // Pour chaque dé du tableau : 
+            for (const dice of selectDices) {
+                // Si l'on a déja trouvé la valeur d'un dé on incrémente de un :
+                if (counterOfYams[dice]) {
+                    counterOfYams[dice]++ ;
+                } else {// sinon c'est la première fois que l'on a vu cette valeur alors on initialise à un :
+                    counterOfYams[dice] = 1 ;
+                }
+            }
+
+            //On compte si l'on a bien 5 fois le même nombre :
+            for (const number in counterOfYams) {
+                if (counterOfYams[number] === 5) {
+                    yams.addEventListener("click", () => {
+                        points.yams = 50;
+                        yams.innerHTML = points.yams;
+                        return points;
+                    });
+                };
+            };
         break;
         case"chance":
     
