@@ -8,10 +8,11 @@ const diceImgBoard3 = document.querySelector(".diceImgBoard3");
 const diceImgBoard4 = document.querySelector(".diceImgBoard4");
 const diceImgBoard5 = document.querySelector(".diceImgBoard5");
 const diceImgBoard6 = document.querySelector(".diceImgBoard6");
-let roundCounter = 3;
+const roundCounterHtml = document.querySelector(".roundCounterHtml");
+const totalEnding = document.getElementById("totalEnding");
 let dices = [];
 let selectDices = [];
-let point
+let roundCounter = 0;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -25,8 +26,8 @@ let randomDicesNumber = () => {
 
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
-    calculatePoints(selectDices,operation)
     randomDicesNumber();
+    switchCheck();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
         // diceImgBoard1.src = `./public/assets/img/dice${dices[index]}.png`;
@@ -41,40 +42,15 @@ let displayRandomDicesNumber = () => {
     };
 };
 
-btnStart.addEventListener("click", displayRandomDicesNumber);
-
-/* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
-parseint permet d'extraire le nombre a l'intérieur du dé sur lequel l'user clique qui avec innerhtml était un string et re devient un nombre
-et donc de faire marcher la méthode indexOf*/
-let getNumberActiveDice = () => {
-    diceHtml.forEach((dice, index) => {
-        dice.addEventListener("click", () => {
-            dice.classList.toggle("active");
-            let clickArrayNumber = parseInt(dice.innerHTML);
-            let indexInDices = dices.indexOf(clickArrayNumber);
-            let indexInSelectDices = selectDices.indexOf(clickArrayNumber);
-            if(dice.classList.contains("active")) {
-                dices.splice(indexInDices, 1);
-                selectDices.push(clickArrayNumber);
-                console.log(selectDices);
-                calculatePoints(selectDices,operation)
-                return selectDices;
-            } else {
-                selectDices.splice(indexInSelectDices, 1);
-                dices.push(clickArrayNumber);
-                return dices;
-            };
-        });
-    });
-};
 
 
-getNumberActiveDice()
+
 
 
 //fonction de relance des dés
 let restartDices = () => {
     dices = [];
+    switchCheck();
     diceHtml.forEach((dice, index) => {
         if(!dice.classList.contains("active")) {
             let diceValue = Math.floor(Math.random() * 6) + 1;
@@ -87,53 +63,27 @@ let restartDices = () => {
 
 btnRestart.addEventListener("click",  restartDices);
 
-
-
-// compteur de manche
-// let roundCounterRemaining = () => {
-//     btnRestart.addEventListener("click", () => {
-//         roundCounter--
-//         console.log(roundCounter);
-//         if(roundCounter === 0) {
-//             btnRestart.classList.add("d-none")
-//         };
-//     });
-// };
-
-// roundCounterRemaining()
-
-
-const points = {
-    "total1": false,    
-    "total2": false,
-    "total3": false,
-    "total4": false,
-    "total5": false,
-    "total6": false,
-    "brelan": false,
-    "carre": false,
-    "full": false,
-    "petiteS": false,
-    "grandeS": false,
-    "yams": false,
-    "chance": false,
+//fonction compteur et condition pour les manches
+let counterClick = () => {
+    roundCounter++;
+    roundCounterHtml.innerHTML = `${roundCounter}/3`
+    if(roundCounter === 3) {
+        roundCounter = 0;
+        // btnStart.classList.remove("d-none");
+        // btnRestart.classList.add("d-none");
+    } 
 }
 
 
-let operation = "brelan" 
-
-
 //fonction switch 
-const calculatePoints=(selectDices,operation)=>{
+let calculatePoints=(selectDices,operation)=>{
     switch(operation){
     // pour le cumul des 1
         case "total1":
             if (selectDices.includes(1)){
                 console.log("présence de :" + 1);
                 let total1 = document.getElementById("total1")
-                total1.innerHTML = ``
                 } else {
-                total1.innerHTML = arrayObject["total1"]
                 console.log("absence de 1");
                 }
             break;
@@ -142,9 +92,7 @@ const calculatePoints=(selectDices,operation)=>{
             if (selectDices.includes(2)){
                 console.log("présence de :" + 2);
                 let total2 = document.getElementById("total2")
-                total2.innerHTML = "2"
                 } else {
-                total2.innerHTML = arrayObject["total2"]
                 console.log("absence de 2");
                 }
             break;
@@ -175,12 +123,10 @@ const calculatePoints=(selectDices,operation)=>{
     // pour le cumul des 6
         case "total6":
             if (selectDices.includes(6)){
-                console.log("présence de :" + 6);
                 } else {
-                console.log("absence de 6");
                 }
         break;
-        case "brelan":
+        case "brelan": 
             const brelanClick = document.getElementById("brelan")
             for (let index = 0; index < selectDices.length; index++) {
                 const numberIsOk = selectDices[index];
@@ -195,31 +141,37 @@ const calculatePoints=(selectDices,operation)=>{
                     brelanClick.addEventListener("click",() => {
                         points.brelan = resultBrelan
                         brelanClick.innerHTML = points.brelan
+                        return points
                     })
-                    console.log(brelan);
-                    console.log("Vous avez un brelan");
-                    break;
                 } else {
                     brelanClick.addEventListener("click",() => {
                         points.brelan = 0
                         brelanClick.innerHTML = points.brelan
+                        return points
                     })
                 }
             }
         break;
         case "carre":
-            for (let index = 0; index < getKeepDice.length; index++) {
+            const carreClick = document.getElementById("carre")
+            for (let index = 0; index < selectDices.length; index++) {
                 
-                const squareIsOk = getKeepDice[index];
-                // console.log(squareIsOk,"log de squareIsOk");
-                const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
-                // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
+                const squareIsOk = selectDices[index];
+                console.log(squareIsOk,"log de squareIsOk");
+                const squareHowMuchOfNumber = selectDices.filter(dice => dice === squareIsOk).length;
+                console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
                 if (squareHowMuchOfNumber >= 4) {
-                    const square =squareIsOk * 4 ;
-                    console.log(square);
-                    console.log("Vous avez un carré");
+                    const square = squareIsOk * 4;
+                    carreClick.addEventListener("click",() => {
+                        points.carre = square
+                        carreClick.innerHTML = points.carre
+                        return points
+                    })
                 }
             }
+        break;
+        case "full":
+
         break;
         case "petiteS":
     
@@ -240,17 +192,72 @@ const calculatePoints=(selectDices,operation)=>{
 }
 
 
-//addition des valeurs du tableau sumDice:
-let getSumDices  = () => {
-    let sumDices = dices[0]+dices[1]+dices[2]+dices[3]+dices[4]
-    return sumDices ;
-}
-//affichage du resultat du calcul des valeurs de sumDice
-console.log(getSumDices());
 
-//afficher chaques valeurs individuellement:
-for (let i = 0; i < dices.length; i++) {
-    const val1 = dices[i];
-    console.log(val1);
+const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "chance", "brelan", "carre"]
+
+let switchCheck = () => {
+    for (let index = 0; index < operation.length; index++) {
+        calculatePoints(selectDices,operation[index])
+    }
 }
 
+
+
+let points = {
+    "total1": false,    
+    "total2": false,
+    "total3": false,
+    "total4": false,
+    "total5": false,
+    "total6": false,
+    "brelan": false,
+    "carre": false,
+    "full": false,
+    "petiteS": false,
+    "grandeS": false,
+    "yams": false,
+    "chance": false,
+}
+
+
+// let totalSum = () => {
+//     const sumPoints = points.reduce()
+//     totalEnding.innerHTML = sumPoints
+// }
+
+// totalSum()
+
+
+
+
+
+/* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
+parseint permet d'extraire le nombre a l'intérieur du dé sur lequel l'user clique qui avec innerhtml était un string et re devient un nombre
+et donc de faire marcher la méthode indexOf*/
+let getNumberActiveDice = () => {
+    diceHtml.forEach((dice, index) => {
+        dice.addEventListener("click", () => {
+            dice.classList.toggle("active");
+            let clickArrayNumber = parseInt(dice.innerHTML);
+            let indexInDices = dices.indexOf(clickArrayNumber);
+            let indexInSelectDices = selectDices.indexOf(clickArrayNumber);
+            switchCheck();
+            if(dice.classList.contains("active")) {
+                dices.splice(indexInDices, 1);
+                selectDices.push(clickArrayNumber);
+                console.log(selectDices);
+                return selectDices;
+            } else {
+                selectDices.splice(indexInSelectDices, 1);
+                dices.push(clickArrayNumber);
+                return dices;
+            };
+        });
+    });
+};
+
+
+getNumberActiveDice()
+
+btnStart.addEventListener("click", displayRandomDicesNumber);
+btnRestart.addEventListener("click", counterClick);
