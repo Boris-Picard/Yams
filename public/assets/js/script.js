@@ -11,7 +11,11 @@ const diceImgBoard6 = document.querySelector(".diceImgBoard6");
 let roundCounter = 3;
 let dices = [];
 let selectDices = [];
+let pair = [] ;
+let smallSuite = [] ;
 let point
+// Ajout perso en dur :
+let dicesDur = [3,3,2,1,2] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -40,6 +44,8 @@ let displayRandomDicesNumber = () => {
         btnRestart.classList.remove("d-none");
     };
 };
+
+
 
 btnStart.addEventListener("click", displayRandomDicesNumber);
 
@@ -118,6 +124,77 @@ const points = {
     "chance": false,
 }
 
+// for (let index = 0; index < dicesDur.length; index++) {
+//     const fullIsOk = dicesDur[index];
+//     // console.log(dicesDur);
+//     const fullHowMuchOfNumber = dicesDur.filter(dice => dice === fullIsOk).length;
+//     console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
+    
+//     if ( fullHowMuchOfNumber == 3 && fullHowMuchOfNumber !=2  ) {
+//         const brelan = [] ;
+//         brelan[index] = fullIsOk ;
+//         console.log(brelan.length,"log taille du brelan");
+//         // console.log(brelan,"log de brelan");
+//         // console.log("Vous avez un Brelan");
+//     }
+//     if ( fullHowMuchOfNumber ==2  && fullHowMuchOfNumber !=3) {
+//         // console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
+//         pair[index] = fullIsOk ;
+//         console.log(pair.length,"log taille de pair");
+//         // console.log(pair,"log de pair");
+//         // console.log("Vous avez une Paire");
+//     }
+// }
+//===========================Full en dur============================
+// faire un foreach pour récupérer les valeurs du tableau
+// si la valeur existe déja, je l'ajoute à elle même sinon je met un
+//  jet mets deux compteurs à false
+// j'incrémente les deux compteurs en fonctions
+//  si le compteur a trois est égale à trois et le compteur à 2 égale à 2 je gagne les 25 points
+// for (let index = 0; index < dicesDur.length; index++) {
+//     const fullIsOk = dicesDur[index];
+//     // console.log(dicesDur);
+//     const fullHowMuchOfNumber = dicesDur.filter(dice => dice === fullIsOk).length;
+//     console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
+//     if ( fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
+//         const pair = [] ;
+//         pair[index] = fullIsOk ;
+//         // console.log(pair,"log de pair");
+//         console.log("Vous avez une Paire");
+//     }
+//     if ( fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber !=2 ) {
+//         const brelan = [] ;
+//         brelan[index] = fullIsOk ;
+//         // console.log(brelan,"log de brelan");
+//         console.log("Vous avez un Brelan");
+//     }
+// }
+
+
+let pairFound = false;
+let brelanFound = false;
+let sumOfFull = 0 ;
+
+for (let index = 0; index < dicesDur.length; index++) {
+    const fullIsOk = dicesDur[index];
+    const fullHowMuchOfNumber = dicesDur.filter(dice => dice === fullIsOk).length;
+
+    if (fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
+        pairFound = true;
+    }
+
+    if (fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber != 2) {
+        brelanFound = true;
+    }
+}
+
+if (pairFound && brelanFound) {
+     sumOfFull = 25;
+}
+
+console.log(sumOfFull + " points");
+
+
 
 let operation = "brelan" 
 
@@ -179,60 +256,66 @@ const calculatePoints=(selectDices,operation)=>{
                 console.log("absence de 6");
                 }
         break;
-        case "brelan":
-            const brelanClick = document.getElementById("brelan")
-            for (let index = 0; index < selectDices.length; index++) {
-                const numberIsOk = selectDices[index];
+        // case "brelan":
+        //     const brelanClick = document.getElementById("brelan")
+        //     for (let index = 0; index < selectDices.length; index++) {
+        //         const numberIsOk = selectDices[index];
             
-                for (let index = 0; index < selectDices.length; index++) {
-                    const numberIsOk = selectDices[index];
-                    console.log(numberIsOk);
+        //         for (let index = 0; index < selectDices.length; index++) {
+        //             const numberIsOk = selectDices[index];
+        //             console.log(numberIsOk);
                 
-                const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
+        //         const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
                 
-                // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
-                if (howMuchOfNumber >= 3) {
-                    const resultBrelan = numberIsOk*3;
-                    brelanClick.addEventListener("click",() => {
-                        points.brelan = resultBrelan
-                        brelanClick.innerHTML = points.brelan
-                    })
-                    console.log(brelan);
-                    console.log("Vous avez un brelan");
-                    break;
-                } else {
-                    brelanClick.addEventListener("click",() => {
-                        points.brelan = 0
-                        brelanClick.innerHTML = points.brelan
-                    })
-                }
-            }
-        break;
-        case "carre":
-            for (let index = 0; index < getKeepDice.length; index++) {
+        //         // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
+        //         if (howMuchOfNumber >= 3) {
+        //             const resultBrelan = numberIsOk*3;
+        //             brelanClick.addEventListener("click",() => {
+        //                 points.brelan = resultBrelan
+        //                 brelanClick.innerHTML = points.brelan
+        //             })
+        //             console.log(brelan);
+        //             console.log("Vous avez un brelan");
+        //             break;
+        //         } else {
+        //             brelanClick.addEventListener("click",() => {
+        //                 points.brelan = 0
+        //                 brelanClick.innerHTML = points.brelan
+        //             })
+        //         }
+        //     }
+        // break;
+        // case "carre":
+        //     for (let index = 0; index < selectDices.length; index++) {
                 
-                const squareIsOk = getKeepDice[index];
-                // console.log(squareIsOk,"log de squareIsOk");
-                const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
-                // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
-                if (squareHowMuchOfNumber >= 4) {
-                    const square =squareIsOk * 4 ;
-                    console.log(square);
-                    console.log("Vous avez un carré");
-                }
-            }
-        break;
+        //         const squareIsOk = selectDices[index];
+        //         // console.log(squareIsOk,"log de squareIsOk");
+        //         const squareHowMuchOfNumber = selectDices.filter(dice => dice === squareIsOk).length;
+        //         // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
+        //         if (squareHowMuchOfNumber >= 4) {
+        //             const square =squareIsOk * 4 ;
+        //             console.log(square);
+        //             console.log("Vous avez un carré");
+        //         }
+        //     }
+        // break;
         case "full":
-            // En fait une boucle pour la Paire :
-            for (let index = 0; index < getKeepDice.length; index++) {
-                const pairIsOk = getKeepDice[index];
-                console.log(pairIsOk, "log de pairIsOk");
-                const pairHowMuchOfNumber = getKeepDice.filter(dice => dice === pairIsOk).length;
-                console.log(pairHowMuchOfNumber,"log de pairHowMuchOfNumber");
-                if ( pairHowMuchOfNumber == 2 ) {
-                    const pair = pairIsOk * 2 ;
-                    console.log(pair);
+            const fullclick = document.getElementById("full")
+            for (let index = 0; index < selectDices.length; index++) {
+                const fullIsOk = selectDices[index];
+                const fullHowMuchOfNumber = selectDices.filter(dice => dice === fullIsOk).length;
+                console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
+                if ( fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
+                    const pair = [] ;
+                    pair[index] = fullIsOk ;
+                    // console.log(pair,"log de pair");
                     console.log("Vous avez une Paire");
+                }
+                if ( fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber !=2 ) {
+                    const brelan = [] ;
+                    brelan[index] = fullIsOk ;
+                    // console.log(brelan,"log de brelan");
+                    console.log("Vous avez un Brelan");
                 }
             }
         break;
@@ -255,7 +338,7 @@ const calculatePoints=(selectDices,operation)=>{
 }
 
 
-//addition des valeurs du tableau sumDice:
+//addition des valeurs du tableau Dice:
 let getSumDices  = () => {
     let sumDices = dices[0]+dices[1]+dices[2]+dices[3]+dices[4]
     return sumDices ;
