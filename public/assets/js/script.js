@@ -15,7 +15,7 @@ let pair = [] ;
 let smallSuite = [] ;
 let point
 // Ajout perso en dur :
-let dicesDur = [3,3,2,2,2] ;
+let dicesDur = [5,2,1,3,4] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -146,56 +146,59 @@ const points = {
 //     }
 // }
 //===========================Full en dur============================
-// faire un foreach pour récupérer les valeurs du tableau
-// si la valeur existe déja, je l'ajoute à elle même sinon je met un
-//  jet mets deux compteurs à false
-// j'incrémente les deux compteurs en fonctions
-//  si le compteur a trois est égale à trois et le compteur à 2 égale à 2 je gagne les 25 points
+
+// let pairFound = false;
+// let brelanFound = false;
+// let sumOfFull = 0 ;
+
 // for (let index = 0; index < dicesDur.length; index++) {
 //     const fullIsOk = dicesDur[index];
-//     // console.log(dicesDur);
 //     const fullHowMuchOfNumber = dicesDur.filter(dice => dice === fullIsOk).length;
-//     console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
-//     if ( fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
-//         const pair = [] ;
-//         pair[index] = fullIsOk ;
-//         // console.log(pair,"log de pair");
-//         console.log("Vous avez une Paire");
+
+//     if (fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
+//         pairFound = true;
 //     }
-//     if ( fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber !=2 ) {
-//         const brelan = [] ;
-//         brelan[index] = fullIsOk ;
-//         // console.log(brelan,"log de brelan");
-//         console.log("Vous avez un Brelan");
+
+//     if (fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber != 2) {
+//         brelanFound = true;
 //     }
 // }
 
+// if (pairFound && brelanFound) {
+//      sumOfFull = 25;
+// }
 
-let pairFound = false;
-let brelanFound = false;
-let sumOfFull = 0 ;
+// console.log(sumOfFull + " points");
 
-for (let index = 0; index < dicesDur.length; index++) {
-    const fullIsOk = dicesDur[index];
-    const fullHowMuchOfNumber = dicesDur.filter(dice => dice === fullIsOk).length;
+//================================Petite suite en dur ==================================
 
-    if (fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
-        pairFound = true;
-    }
+let refSmallSuite = [1, 2, 3, 4, 5];
+// .sort permet de classer les nombres par ordre croissant :
+// Autre version sans les {} : dicesDur.sort((a, b) => a - b) ;
+dicesDur.sort(function(a,b) {
+    return a-b ;
+})
 
-    if (fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber != 2) {
-        brelanFound = true;
+
+let SmallSuiteIsOk = true;
+
+for (const value of refSmallSuite) {
+    if (!dicesDur.includes(value)) {
+        SmallSuiteIsOk = false ;
+        break ;
     }
 }
 
-if (pairFound && brelanFound) {
-     sumOfFull = 25;
+let pointsSmallSuite = 0 ;
+
+if (SmallSuiteIsOk) {
+    pointsSmallSuite = 30 ;
 }
 
-console.log(sumOfFull + " points");
+console.log(pointsSmallSuite,"log de pointsSmallSuite")
 
 
-
+// ==================================================
 let operation = "brelan" 
 
 
