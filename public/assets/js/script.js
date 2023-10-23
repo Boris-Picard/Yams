@@ -3,7 +3,6 @@ const btnStart = document.querySelector(".btnStart");
 const btnRestart = document.querySelector(".btnRestart");
 const roundCounterHtml = document.querySelector(".roundCounterHtml");
 const totalEnding = document.getElementById("totalEnding");
-const tableResult = document.querySelector(".tableResult");
 let dices = [];
 let selectDices = [];
 let roundCounter = 0;
@@ -57,12 +56,18 @@ let calculatePoints=(selectDices,operation)=>{
     switch(operation){
     // pour le cumul des 1
         case "total1":
+            let sum = 0
+            let total1 = document.getElementById("total1")
             if (selectDices.includes(1)){
-                console.log("présence de :" + 1);
-                let total1 = document.getElementById("total1")
-                } else {
-                console.log("absence de 1");
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum += selectDices[index];
+                    total1.addEventListener("click", () => {
+                        points.total1 = sum;
+                        total1.innerHTML = points.total1;
+                        return points;
+                    });
+                };
+                };
             break;
     // pour le cumul des 2
         case "total2":
@@ -153,6 +158,7 @@ let calculatePoints=(selectDices,operation)=>{
                     fullClick.addEventListener("click",() => {
                         points.full = 25;
                         fullClick.innerHTML = points.full;
+                        fullClick.classList.add("disable");
                         return points;
                     });
                 };
@@ -203,6 +209,7 @@ let calculatePoints=(selectDices,operation)=>{
                 grandeS.addEventListener("click", () => {
                     points.grandeS = 40;
                     grandeS.innerHTML = points.grandeS;
+                    grandeS.classList.add("disable");
                     return points;
                 })
             }
@@ -235,8 +242,20 @@ let calculatePoints=(selectDices,operation)=>{
                 };
             };
         break;
-        case"chance":
-    
+        case"luck":
+        let sumOfLuck = 0;
+        const luck = document.getElementById("luck");
+        for (const dice of selectDices) {
+            // sumOfLuck += dice;
+            sumOfLuck = sumOfLuck + dice ;
+            if(sumOfLuck) {
+                luck.addEventListener("click", () => {
+                    points.luck = sumOfLuck;
+                    luck.innerHTML = points.luck;
+                    return points;
+                })
+            };
+        };
         break;
         default:
         console.log("dead");
@@ -246,7 +265,7 @@ let calculatePoints=(selectDices,operation)=>{
 
 
 
-const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "chance", "brelan", "carre"];
+const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
 
 let switchCheck = () => {
     for (let index = 0; index < operation.length; index++) {
@@ -268,33 +287,37 @@ let points = {
     "petiteS": false,
     "grandeS": false,
     "yams": false,
-    "chance": false,
+    "luck": false,
 }
 
 
 
-
+// fonction qui calcul le nombre de points total contenu dans points au fur et a mesure et affiche dans le tableau html
 let totalSum = () => {
-    sum = 0
-    for (let index = 0; index < points.length; index++) {
-        sum += points[index];
-        console.log(sum);
-        totalEnding.innerHTML = sum
+    let sum = 0
+    for (const key in points) {
+        sum += points[key];
+        totalEnding.innerHTML = sum;
     };
 };
-
 
 
 //fonction compteur et condition pour les manches
 let counterClick = () => {
     roundCounter++;
     roundCounterHtml.innerHTML = `${roundCounter}/3`
+    const tableResultText = document.querySelectorAll(".tableResultText");
+    tableResultText.forEach((tr) => {
+        if(tr.innerHTML) {
+            console.log(123);
+        }
+    })
     if(roundCounter === 3) {
         roundCounter = 0;
         // btnStart.classList.remove("d-none");
         // btnRestart.classList.add("d-none");
-    } 
-}
+    };
+};
 
 
 /* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
@@ -308,7 +331,9 @@ let getNumberActiveDice = () => {
             let indexInDices = dices.indexOf(clickArrayNumber);
             let indexInSelectDices = selectDices.indexOf(clickArrayNumber);
             switchCheck();
+            totalSum();
             if(dice.classList.contains("active")) {
+                calculatePoints(selectDices,operation);
                 dices.splice(indexInDices, 1);
                 selectDices.push(clickArrayNumber);
                 console.log(selectDices);

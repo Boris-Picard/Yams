@@ -31,7 +31,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-12 my-3 text-center">
-                    <h1 class="roundCounterHtml d-flex justify-content-center"></h1>
+                    <h1 class="roundCounterHtml d-flex justify-content-center">0/3</h1>
                     <button class="btn btnStart">
                         Commencer la partie
                     </button>
@@ -54,7 +54,6 @@
                     </button>
                 </div> 
                 <div class="col-8 col-md-4 my-5 secondDiceContainer rounded-5 d-flex align-items-center justify-content-center mx-5">
-                    <p class="tableResult"></p>
                 </div>
                 
                 <!-- Thibaud tableau  -->
@@ -67,11 +66,11 @@
                             </tr>
                             <tr>
                                 <td>Total de 1</td>
-                                <td id="total1"></td>
+                                <td id="total1" class="tableResultText"></td>
                             </tr>
                             <tr>
                                 <td>Total de 2</td>
-                                <td id="total2"></td>
+                                <td id="total2" class="tableResultText"></td>
                             </tr>
                             <tr>
                                 <td>Total de 3</td>
@@ -95,7 +94,7 @@
                             </tr>
                             <tr>
                                 <td>Brelan (Cumul des 3 dés identiques)</td>
-                                <td id="brelan"></td>
+                                <td id="brelan" class="tableResultText"></td>
                             </tr>
                             <tr>
                                 <td>Carré (Cumul des 4 dés identiques)</td>
@@ -119,7 +118,7 @@
                             </tr>
                             <tr>
                                 <td>Chance (Total des 5 dés)</td>
-                                <td id="chance"></td>
+                                <td id="luck"></td>
                             </tr>
                         </tbody>
                         <tfoot>
