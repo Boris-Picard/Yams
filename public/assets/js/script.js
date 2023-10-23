@@ -15,7 +15,7 @@ let pair = [] ;
 let smallSuite = [] ;
 let point
 // Ajout perso en dur :
-let dicesDur = [2,3,4,5,6] ;
+let dicesDur = [5,5,5,5,5] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -222,6 +222,33 @@ if (LargeSuiteIsOk) {
 }
 
 console.log(pointsLargeSuite,"log de pointsLargeSuite")
+//========================== yams : 5 dés identiques ============================
+
+let pointsOfYams = 0;
+
+// Création d'un tableau pour compter le nombre de fois où l'on va avoir une valeur :
+const counterOfYams = [];
+
+// Pour chaque dé du tableau : 
+for (const dice of dicesDur) {
+    // Si l'on a déja trouvé la valeur d'un dé on incrémente de un :
+    if (counterOfYams[dice]) {
+        counterOfYams[dice]++ ;
+    } else {// sinon c'est la première fois que l'on a vu cette valeur alors on initialise à un :
+        counterOfYams[dice] = 1 ;
+    }
+}
+
+//On compte si l'on a bien 5 fois le même nombre :
+for (const number in counterOfYams) {
+    if (counterOfYams[number] === 5) {
+        pointsOfYams = 50 ;
+    }
+}
+console.log(counterOfYams,"counterOfYams");
+console.log(pointsOfYams,"log de pointsOfYams") ;
+
+
 
 // ==================================================
 let operation = "brelan" 
