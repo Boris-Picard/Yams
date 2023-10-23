@@ -11,6 +11,7 @@ const diceImgBoard6 = document.querySelector(".diceImgBoard6");
 let roundCounter = 3;
 let dices = [];
 let selectDices = [];
+let point
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -24,6 +25,7 @@ let randomDicesNumber = () => {
 
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
+    calculatePoints(selectDices,operation)
     randomDicesNumber();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
@@ -55,6 +57,7 @@ let getNumberActiveDice = () => {
                 dices.splice(indexInDices, 1);
                 selectDices.push(clickArrayNumber);
                 console.log(selectDices);
+                calculatePoints(selectDices,operation)
                 return selectDices;
             } else {
                 selectDices.splice(indexInSelectDices, 1);
@@ -98,6 +101,27 @@ btnRestart.addEventListener("click",  restartDices);
 
 // roundCounterRemaining()
 
+
+const points = {
+    "total1": false,    
+    "total2": false,
+    "total3": false,
+    "total4": false,
+    "total5": false,
+    "total6": false,
+    "brelan": false,
+    "carre": false,
+    "full": false,
+    "petiteS": false,
+    "grandeS": false,
+    "yams": false,
+    "chance": false,
+}
+
+
+let operation = "brelan" 
+
+
 //fonction switch 
 const calculatePoints=(selectDices,operation)=>{
     switch(operation){
@@ -105,7 +129,10 @@ const calculatePoints=(selectDices,operation)=>{
         case "total1":
             if (selectDices.includes(1)){
                 console.log("présence de :" + 1);
+                let total1 = document.getElementById("total1")
+                total1.innerHTML = ``
                 } else {
+                total1.innerHTML = arrayObject["total1"]
                 console.log("absence de 1");
                 }
             break;
@@ -113,7 +140,10 @@ const calculatePoints=(selectDices,operation)=>{
         case "total2":
             if (selectDices.includes(2)){
                 console.log("présence de :" + 2);
+                let total2 = document.getElementById("total2")
+                total2.innerHTML = "2"
                 } else {
+                total2.innerHTML = arrayObject["total2"]
                 console.log("absence de 2");
                 }
             break;
@@ -149,30 +179,39 @@ const calculatePoints=(selectDices,operation)=>{
                 console.log("absence de 6");
                 }
         break;
-        case "threeOfAKind": // Brelan
+        case "brelan":
+            const brelanClick = document.getElementById("brelan")
+            for (let index = 0; index < selectDices.length; index++) {
+                const numberIsOk = selectDices[index];
             
                 for (let index = 0; index < selectDices.length; index++) {
                     const numberIsOk = selectDices[index];
                     console.log(numberIsOk);
                 
-                    // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau. .filter créer un nouveau tableau c'est sur lui que l'on effectue la recherche. Ce tableau est créer avec tous les éléments qui renvoi "true" lors .filter :
-                    
-                    const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
+                const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
                 
-                    // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
-                    if (howMuchOfNumber >= 3) {
-                        const brelan = numberIsOk*3;
-                        console.log(brelan);
-                        console.log("Vous avez un brelan");
-                        break;
-                    }
-                } 
+                // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
+                if (howMuchOfNumber >= 3) {
+                    const resultBrelan = numberIsOk*3;
+                    brelanClick.addEventListener("click",() => {
+                        points.brelan = resultBrelan
+                        brelanClick.innerHTML = points.brelan
+                    })
+                    console.log(brelan);
+                    console.log("Vous avez un brelan");
+                    break;
+                } else {
+                    brelanClick.addEventListener("click",() => {
+                        points.brelan = 0
+                        brelanClick.innerHTML = points.brelan
+                    })
+                }
             }
-        }
         break;
         case "carre":
-            for (let index = 0; index < selectDices.length; index++) {
-                const squareIsOk = selectDices[index];
+            for (let index = 0; index < getKeepDice.length; index++) {
+                
+                const squareIsOk = getKeepDice[index];
                 // console.log(squareIsOk,"log de squareIsOk");
                 const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
                 // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
@@ -215,9 +254,6 @@ const calculatePoints=(selectDices,operation)=>{
     }
 }
 
-calculatePoints()
-
-calculatePoints(selectDices, )
 
 //addition des valeurs du tableau sumDice:
 let getSumDices  = () => {
