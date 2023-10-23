@@ -109,12 +109,26 @@ for (let index = 0; index < getKeepDice.length; index++) {
     // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
     if (squareHowMuchOfNumber >= 4) {
         const square =squareIsOk * 4 ;
-        console.log(square);
-        console.log("Vous avez un carré");
+        // console.log(square);
+        // console.log("Vous avez un carré");
     }
 }
 
 
+// ==================== Full ==================== 
+// Full : une Paire et un Brelan (25 points) :
+
+for (let index = 0; index < getKeepDice.length; index++) {
+    const fullIsOk = getKeepDice[index];
+    console.log(fullIsok, "log de fullIsOk");
+    const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
+    // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
+    if (squareHowMuchOfNumber >= 4) {
+        const square =squareIsOk * 4 ;
+        console.log(square);
+        console.log("Vous avez un carré");
+    }
+}
 
 
 
