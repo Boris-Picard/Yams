@@ -1,13 +1,6 @@
 const diceHtml = document.querySelectorAll(".diceHtml");     
 const btnStart = document.querySelector(".btnStart");
 const btnRestart = document.querySelector(".btnRestart");
-const btnValid = document.querySelector(".btnValid");
-const diceImgBoard1 = document.querySelector(".diceImgBoard1");
-const diceImgBoard2 = document.querySelector(".diceImgBoard2");
-const diceImgBoard3 = document.querySelector(".diceImgBoard3");
-const diceImgBoard4 = document.querySelector(".diceImgBoard4");
-const diceImgBoard5 = document.querySelector(".diceImgBoard5");
-const diceImgBoard6 = document.querySelector(".diceImgBoard6");
 const roundCounterHtml = document.querySelector(".roundCounterHtml");
 const totalEnding = document.getElementById("totalEnding");
 let dices = [];
@@ -28,23 +21,19 @@ let randomDicesNumber = () => {
 let displayRandomDicesNumber = () => {
     randomDicesNumber();
     switchCheck();
+    counterClick();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
-        // diceImgBoard1.src = `./public/assets/img/dice${dices[index]}.png`;
+        // randomDicesImg = `./public/assets/img/dice`+dices[index]+`.png`;
         // diceImgBoard1.setAttribute("src", randomDicesImg);
         // diceImgBoard2.setAttribute("src", randomDicesImg);
         // diceImgBoard3.setAttribute("src", randomDicesImg);
         // diceImgBoard4.setAttribute("src", randomDicesImg);
         // diceImgBoard5.setAttribute("src", randomDicesImg);
-        // diceImgBoard6.setAttribute("src", randomDicesImg);
         btnStart.classList.add("d-none");
         btnRestart.classList.remove("d-none");
     };
 };
-
-
-
-
 
 
 //fonction de relance des dés
@@ -60,19 +49,6 @@ let restartDices = () => {
     });
     return selectDices;
 };
-
-btnRestart.addEventListener("click",  restartDices);
-
-//fonction compteur et condition pour les manches
-let counterClick = () => {
-    roundCounter++;
-    roundCounterHtml.innerHTML = `${roundCounter}/3`
-    if(roundCounter === 3) {
-        roundCounter = 0;
-        // btnStart.classList.remove("d-none");
-        // btnRestart.classList.add("d-none");
-    } 
-}
 
 
 //fonction switch 
@@ -139,18 +115,12 @@ let calculatePoints=(selectDices,operation)=>{
                 if (howMuchOfNumber >= 3) {
                     const resultBrelan = numberIsOk*3;
                     brelanClick.addEventListener("click",() => {
-                        points.brelan = resultBrelan
-                        brelanClick.innerHTML = points.brelan
-                        return points
-                    })
-                } else {
-                    brelanClick.addEventListener("click",() => {
-                        points.brelan = 0
-                        brelanClick.innerHTML = points.brelan
-                        return points
-                    })
-                }
-            }
+                        points.brelan = resultBrelan;
+                        brelanClick.innerHTML = points.brelan;
+                        return points;
+                    });
+                };
+            };
         break;
         case "carre":
             const carreClick = document.getElementById("carre")
@@ -163,21 +133,78 @@ let calculatePoints=(selectDices,operation)=>{
                 if (squareHowMuchOfNumber >= 4) {
                     const square = squareIsOk * 4;
                     carreClick.addEventListener("click",() => {
-                        points.carre = square
-                        carreClick.innerHTML = points.carre
-                        return points
+                        points.carre = square;
+                        carreClick.innerHTML = points.carre;
+                        return points;
                     })
                 }
             }
         break;
         case "full":
-
+            const fullClick = document.getElementById("full")
+            for (let index = 0; index < selectDices.length; index++) {
+                const fullIsOk = selectDices[index];
+                const fullHowMuchOfNumber = selectDices.filter(dice => dice === fullIsOk).length;
+                console.log(fullHowMuchOfNumber,"log de fullHowMuchOfNumber");
+                if ( fullHowMuchOfNumber >= 2 && fullHowMuchOfNumber != 3) {
+                    const pair = [];
+                    pair[index] = fullIsOk ;
+                    fullClick.addEventListener("click",() => {
+                        points.full = 25;
+                        fullClick.innerHTML = points.full;
+                        return points;
+                    });
+                };
+                if ( fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber !=2 ) {
+                    const brelan = [] ;
+                    brelan[index] = fullIsOk ;
+                    fullClick.addEventListener("click",() => {
+                        points.full = 25;
+                        fullClick.innerHTML = points.full;
+                        return points;
+                    });
+                };
+            };
         break;
         case "petiteS":
-    
+            const petiteS = document.getElementById("petiteS")
+            selectDices.sort(function(a,b) {
+                return a-b ;
+            })
+            let SmallSuiteIsOk = true;
+            for (const value of selectDices) {
+                if (!selectDices.includes(value)) {
+                    SmallSuiteIsOk = false ;
+                    break ;
+                }
+            }
+            if (SmallSuiteIsOk) {
+                petiteS.addEventListener("click", () => {
+                    points.petiteS = 30;
+                    petiteS.innerHTML = points.petiteS;
+                    return points;
+                })
+            }
         break;
         case "grandeS":
-    
+            const grandeS = document.getElementById("grandeS")
+            selectDices.sort(function(a,b) {
+                return a-b ;
+            })
+            let LargeSuiteIsOk = true;
+            for (const value of selectDices) {
+                if (!selectDices.includes(value)) {
+                    LargeSuiteIsOk = false ;
+                    break ;
+                }
+            }
+            if (LargeSuiteIsOk) {
+                grandeS.addEventListener("click", () => {
+                    points.grandeS = 40;
+                    grandeS.innerHTML = points.grandeS;
+                    return points;
+                })
+            }
         break;
         case "yams":
     
@@ -193,14 +220,13 @@ let calculatePoints=(selectDices,operation)=>{
 
 
 
-const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "chance", "brelan", "carre"]
+const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "chance", "brelan", "carre"];
 
 let switchCheck = () => {
     for (let index = 0; index < operation.length; index++) {
-        calculatePoints(selectDices,operation[index])
-    }
-}
-
+        calculatePoints(selectDices,operation[index]);
+    };
+};
 
 
 let points = {
@@ -220,15 +246,29 @@ let points = {
 }
 
 
-// let totalSum = () => {
-//     const sumPoints = points.reduce()
-//     totalEnding.innerHTML = sumPoints
-// }
-
-// totalSum()
 
 
+let totalSum = () => {
+    sum = 0
+    for (let index = 0; index < points.length; index++) {
+        sum += points[index];
+        console.log(sum);
+        totalEnding.innerHTML = sum
+    };
+};
 
+
+
+//fonction compteur et condition pour les manches
+let counterClick = () => {
+    roundCounter++;
+    roundCounterHtml.innerHTML = `${roundCounter}/3`
+    if(roundCounter === 3) {
+        roundCounter = 0;
+        // btnStart.classList.remove("d-none");
+        // btnRestart.classList.add("d-none");
+    } 
+}
 
 
 /* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
@@ -259,5 +299,10 @@ let getNumberActiveDice = () => {
 
 getNumberActiveDice()
 
+
+
+// listener
 btnStart.addEventListener("click", displayRandomDicesNumber);
 btnRestart.addEventListener("click", counterClick);
+btnRestart.addEventListener("click", restartDices);
+btnRestart.addEventListener("click", totalSum);
