@@ -64,7 +64,7 @@ let brelan ;
 // L'utilisateur peut garder un nombre de dés entre 1 et 5 :
 
 /////////////////////////Valeurs en dur ://///////////////////////////
-selectDices = [4,2,2,2,2] ;
+selectDices = [3,3,2,2,2] ;
 
 // Stocker le résultat des dés que l'utilisateur va garder dans une variable: 
 let keepDices = () => {
@@ -94,7 +94,7 @@ for (let index = 0; index < getKeepDice.length; index++) {
     if (howMuchOfNumber >= 3) {
         const brelan = numberIsOk*3;
         // console.log(brelan);
-        // console.log("Vous avez un brelan");
+        // console.log("Vous avez un Brelan");
         break;
     }
 }
@@ -110,7 +110,7 @@ for (let index = 0; index < getKeepDice.length; index++) {
     if (squareHowMuchOfNumber >= 4) {
         const square =squareIsOk * 4 ;
         // console.log(square);
-        // console.log("Vous avez un carré");
+        console.log("Vous avez un Carré");
     }
 }
 
@@ -118,15 +118,16 @@ for (let index = 0; index < getKeepDice.length; index++) {
 // ==================== Full ==================== 
 // Full : une Paire et un Brelan (25 points) :
 
+// En fait une boucle pour la Paire :
 for (let index = 0; index < getKeepDice.length; index++) {
-    const fullIsOk = getKeepDice[index];
-    console.log(fullIsok, "log de fullIsOk");
-    const squareHowMuchOfNumber = getKeepDice.filter(dice => dice === squareIsOk).length;
-    // console.log(squareHowMuchOfNumber,"log de squareHowMuchOfNumber");
-    if (squareHowMuchOfNumber >= 4) {
-        const square =squareIsOk * 4 ;
-        console.log(square);
-        console.log("Vous avez un carré");
+    const pairIsOk = getKeepDice[index];
+    console.log(pairIsOk, "log de pairIsOk");
+    const pairHowMuchOfNumber = getKeepDice.filter(dice => dice === pairIsOk).length;
+    console.log(pairHowMuchOfNumber,"log de pairHowMuchOfNumber");
+    if ( pairHowMuchOfNumber == 2 ) {
+        const pair = pairIsOk * 2 ;
+        console.log(pair);
+        console.log("Vous avez une Paire");
     }
 }
 
