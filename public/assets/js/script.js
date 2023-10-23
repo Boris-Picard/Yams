@@ -15,7 +15,7 @@ let pair = [] ;
 let smallSuite = [] ;
 let point
 // Ajout perso en dur :
-let dicesDur = [5,5,5,5,5] ;
+let dicesDur = [2,2,2,2,2] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -245,11 +245,18 @@ for (const number in counterOfYams) {
         pointsOfYams = 50 ;
     }
 }
-console.log(counterOfYams,"counterOfYams");
+console.log(counterOfYams,"counterOfYams") ;
 console.log(pointsOfYams,"log de pointsOfYams") ;
+//========================== chance ============================
+let sumOfLuck = 0;
 
+for (const dice of dicesDur) {
 
+    // sumOfLuck += dice;
+    sumOfLuck = sumOfLuck + dice ;
 
+}
+console.log(sumOfLuck,"log de sumOfLuck") ;
 // ==================================================
 let operation = "brelan" 
 
