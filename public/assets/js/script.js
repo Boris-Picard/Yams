@@ -1,3 +1,4 @@
+//déclarations des selecteurs 
 const diceHtml = document.querySelectorAll(".diceHtml");     
 const btnStart = document.querySelector(".btnStart");
 const btnRestart = document.querySelector(".btnRestart");
@@ -8,9 +9,17 @@ const diceImgBoard3 = document.querySelector(".diceImgBoard3");
 const diceImgBoard4 = document.querySelector(".diceImgBoard4");
 const diceImgBoard5 = document.querySelector(".diceImgBoard5");
 const diceImgBoard6 = document.querySelector(".diceImgBoard6");
+
+//innit variables
 let roundCounter = 3;
 let dices = [];
 let selectDices = [];
+
+//addition des valeurs du tableau dices:
+let getSumDices  = () => {
+    let sumDices = dices[0]+dices[1]+dices[2]+dices[3]+dices[4]
+    return sumDices ;
+}
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -20,7 +29,6 @@ let randomDicesNumber = () => {
     };
     return dices;
 };
-
 
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
@@ -38,8 +46,6 @@ let displayRandomDicesNumber = () => {
         btnRestart.classList.remove("d-none");
     };
 };
-
-btnStart.addEventListener("click", displayRandomDicesNumber);
 
 /* fonction qui permet au clic de supprimer un nombre de [dices] et le mettre dans [selectDices] et inversement
 parseint permet d'extraire le nombre a l'intérieur du dé sur lequel l'user clique qui avec innerhtml était un string et re devient un nombre
@@ -65,111 +71,6 @@ let getNumberActiveDice = () => {
     });
 };
 
-//addition des valeurs du tableau sumDice:
-let getSumDices  = () => {
-    let sumDices = dices[0]+dices[1]+dices[2]+dices[3]+dices[4]
-    return sumDices ;
-}
-//affichage du resultat du calcul des valeurs de sumDice
-console.log(getSumDices());
-
-//afficher chaques valeurs individuellement:
-for (let i = 0; i < dices.length; i++) {
-    const val1 = dices[i];
-    console.log(val1);
-}
-
-//chercher si un élément est présent dans un tableau:
-let valeur1 = 1;
-let valeur2 = 2;
-let valeur3 = 3;
-
-const selectDices = [1,1,3,3,4]
-const operation = "total1"
-//Teddy
-const calculatePoints=(selectDices,operation)=>{
-switch(operation){
-// pour le cumul des 1
-    case "total1":
-        if (selectDices.includes(1)){
-            console.log("présence de :" + 1);
-            } else {
-            console.log("absence de 1");
-            }
-        break;
-// pour le cumul des 2
-    case "total2":
-        if (selectDices.includes(2)){
-            console.log("présence de :" + 2);
-            } else {
-            console.log("absence de 2");
-            }
-        break;
-// pour le cumul des 3
-    case "total3":
-        if (selectDices.includes(3)){
-            console.log("présence de :" + 3);
-            } else {
-            console.log("absence de 3");
-            }
-        break;
-// pour le cumul des 4
-    case "total4":
-        if (selectDices.includes(4)){
-            console.log("présence de :" + 4);
-            } else {
-            console.log("absence de 4");
-            }
-    break;
-// pour le cumul des 5
-    case "total5":
-        if (selectDices.includes(5)){
-            console.log("présence de :" + 5);
-            } else {
-            console.log("absence de 5");
-            }
-    break;
-// pour le cumul des 6
-    case "total6":
-        if (selectDices.includes(6)){
-            console.log("présence de :" + 6);
-            } else {
-            console.log("absence de 6");
-            }
-    break;
-    case "brelan":
-        
-    break;
-    case "carre":
-
-    break;
-    case "petiteS":
-
-    break;
-    case "grandeS":
-
-    break;
-    case "yams":
-
-    break;
-    case"chance":
-
-    break;
-    default:
-    console.log("dead");
-    break;
-}
-}
-
-calculatePoints([1,1,3,3,4],"total1")
-
-
-
-
-
-getNumberActiveDice()
-
-
 //fonction de relance des dés
 let restartDices = () => {
     dices = [];
@@ -183,41 +84,32 @@ let restartDices = () => {
     return selectDices;
 };
 
-btnRestart.addEventListener("click",  restartDices);
-
-
-
-// compteur de manche
-// let roundCounterRemaining = () => {
-//     btnRestart.addEventListener("click", () => {
-//         roundCounter--
-//         console.log(roundCounter);
-//         if(roundCounter === 0) {
-//             btnRestart.classList.add("d-none")
-//         };
-//     });
-// };
-
-// roundCounterRemaining()
-
 //fonction switch 
 const calculatePoints=(selectDices,operation)=>{
     switch(operation){
     // pour le cumul des 1
         case "total1":
-            if (selectDices.includes(1)){
-                console.log("présence de :" + 1);
-                } else {
-                console.log("absence de 1");
+            // let result;
+            let array1 = []
+            selectDices.forEach(dice => {
+                if (dice == 1) {
+                    array1.push(dice);
                 }
+                let reducer1 = (accumulator,curr)=>accumulator+curr;
+                console.log(array1.reduce(reducer1));
+            });
+            // console.log(result)
             break;
     // pour le cumul des 2
         case "total2":
-            if (selectDices.includes(2)){
-                console.log("présence de :" + 2);
-                } else {
-                console.log("absence de 2");
+            let array2 = []
+            selectDices.forEach(dice => {
+                if (dice == 2) {
+                    array2.push(dice);
                 }
+                let reducer2 = (accumulator,curr)=>accumulator+curr;
+                console.log(array2.reduce(reducer2));
+            });
             break;
     // pour le cumul des 3
         case "total3":
@@ -299,15 +191,47 @@ const calculatePoints=(selectDices,operation)=>{
     }
 }
 
-calculatePoints()
+//affichage du resultat du calcul des valeurs de sumDice
+// console.log(getSumDices());
 
-calculatePoints(selectDices, )
+//afficher chaques valeurs individuellement:
+// for (let i = 0; i < dices.length; i++) {
+//     const val1 = dices[i];
+//     console.log(val1);
+// }
 
-//addition des valeurs du tableau sumDice:
-let getSumDices  = () => {
-    let sumDices = dices[0]+dices[1]+dices[2]+dices[3]+dices[4]
-    return sumDices ;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+// compteur de manche
+// let roundCounterRemaining = () => {
+//     btnRestart.addEventListener("click", () => {
+//         roundCounter--
+//         console.log(roundCounter);
+//         if(roundCounter === 0) {
+//             btnRestart.classList.add("d-none")
+//         };
+//     });
+// };
+
+// roundCounterRemaining()
+
+calculatePoints([1,1,3,3,4],"total1");
+
+getNumberActiveDice();
+
+
+
+
 //affichage du resultat du calcul des valeurs de sumDice
 console.log(getSumDices());
 
@@ -317,3 +241,7 @@ for (let i = 0; i < dices.length; i++) {
     console.log(val1);
 }
 
+
+
+btnStart.addEventListener("click", displayRandomDicesNumber);
+btnRestart.addEventListener("click",  restartDices);
