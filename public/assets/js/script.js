@@ -24,6 +24,7 @@ let randomDicesNumber = () => {
 
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
+    calculatePoints(selectDices,operation)
     randomDicesNumber();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
@@ -72,6 +73,7 @@ getNumberActiveDice()
 //fonction de relance des dés
 let restartDices = () => {
     dices = [];
+    calculatePoints(selectDices,operation)
     diceHtml.forEach((dice, index) => {
         if(!dice.classList.contains("active")) {
             let diceValue = Math.floor(Math.random() * 6) + 1;
@@ -99,6 +101,8 @@ btnRestart.addEventListener("click",  restartDices);
 
 // roundCounterRemaining()
 
+const operation = "total1"
+
 //fonction switch 
 const calculatePoints=(selectDices,operation)=>{
     switch(operation){
@@ -106,6 +110,8 @@ const calculatePoints=(selectDices,operation)=>{
         case "total1":
             if (selectDices.includes(1)){
                 console.log("présence de :" + 1);
+                let total1 = document.getElementById("total1")
+                total1.innerHTML = "1"
                 } else {
                 console.log("absence de 1");
                 }
@@ -198,9 +204,9 @@ const calculatePoints=(selectDices,operation)=>{
     }
 }
 
-calculatePoints()
 
-calculatePoints(selectDices, )
+
+
 
 //addition des valeurs du tableau sumDice:
 let getSumDices  = () => {

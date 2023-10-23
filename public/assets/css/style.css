@@ -78,9 +78,9 @@ header {
     width: 55px;
 }
 
-.active {
+/* .active {
     width: 40px;
-}
+} */
 
 @media all and (max-width: 600px) {
     .diceImg1 {
