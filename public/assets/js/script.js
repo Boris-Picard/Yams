@@ -15,7 +15,7 @@ let pair = [] ;
 let smallSuite = [] ;
 let point
 // Ajout perso en dur :
-let dicesDur = [3,3,2,1,2] ;
+let dicesDur = [3,3,2,2,2] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
