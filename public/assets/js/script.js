@@ -15,7 +15,7 @@ let pair = [] ;
 let smallSuite = [] ;
 let point
 // Ajout perso en dur :
-let dicesDur = [5,2,1,3,4] ;
+let dicesDur = [2,3,4,5,6] ;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
@@ -172,7 +172,7 @@ const points = {
 
 //================================Petite suite en dur ==================================
 
-let refSmallSuite = [1, 2, 3, 4, 5];
+let refSmallSuite = [1, 2, 3, 4, 5] ;
 // .sort permet de classer les nombres par ordre croissant :
 // Autre version sans les {} : dicesDur.sort((a, b) => a - b) ;
 dicesDur.sort(function(a,b) {
@@ -197,6 +197,31 @@ if (SmallSuiteIsOk) {
 
 console.log(pointsSmallSuite,"log de pointsSmallSuite")
 
+//================================grande suite en dur ==================================
+let refLargeSuite = [2, 3, 4, 5, 6] ;
+// .sort permet de classer les nombres par ordre croissant :
+// Autre version sans les {} : dicesDur.sort((a, b) => a - b) ;
+dicesDur.sort(function(a,b) {
+    return a-b ;
+})
+
+
+let LargeSuiteIsOk = true;
+
+for (const value of refLargeSuite) {
+    if (!dicesDur.includes(value)) {
+        LargeSuiteIsOk = false ;
+        break ;
+    }
+}
+
+let pointsLargeSuite = 0 ;
+
+if (LargeSuiteIsOk) {
+    pointsLargeSuite = 40 ;
+}
+
+console.log(pointsLargeSuite,"log de pointsLargeSuite")
 
 // ==================================================
 let operation = "brelan" 
