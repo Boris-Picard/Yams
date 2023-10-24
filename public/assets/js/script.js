@@ -23,7 +23,7 @@ let refLargeSuite = [2, 3, 4, 5, 6];
 let dices = [];
 let selectDices = [];
 const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
-let roundCounter = 0;
+let roundCounter = 1;
 
 //addition des valeurs du tableau dices:
 let getSumDices  = () => {
@@ -43,7 +43,6 @@ let randomDicesNumber = () => {
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
     randomDicesNumber();
-    counterClick();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
         btnStart.classList.add("d-none");
@@ -270,7 +269,7 @@ let calculatePoints=(selectDices,operation)=>{
                 grandeS.innerHTML = points.grandeS;
             }
         break;
-        case "yams":
+        case "yams":;
             let pointsOfYams = 0;
             // Création d'un tableau pour compter le nombre de fois où l'on va avoir une valeur :
             const counterOfYams = [];
@@ -278,9 +277,9 @@ let calculatePoints=(selectDices,operation)=>{
             for (const dice of selectDices) {
                 // Si l'on a déja trouvé la valeur d'un dé on incrémente de un :
                 if (counterOfYams[dice]) {
-                    counterOfYams[dice]++ ;
+                    counterOfYams[dice]++;
                 } else {// sinon c'est la première fois que l'on a vu cette valeur alors on initialise à un :
-                    counterOfYams[dice] = 1 ;
+                    counterOfYams[dice] = 1;
                 }
             }
             //On compte si l'on a bien 5 fois le même nombre :
@@ -291,7 +290,7 @@ let calculatePoints=(selectDices,operation)=>{
                 } else {
                     points.yams = 0;
                     yams.innerHTML = points.yams;
-                }
+                };
             };
         break;
         case"luck":
@@ -380,6 +379,10 @@ getNumberActiveDice()
 total1.addEventListener("click", () => {
     calculatePoints(selectDices,"total1");
     if(total1.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        counterClick()
+        displayRandomDicesNumber();
         totalSum();
         total1.disabled = true;
         btnRestart.disabled = false;
@@ -389,6 +392,9 @@ total1.addEventListener("click", () => {
 total2.addEventListener("click", () => {
     calculatePoints(selectDices,"total2");
     if(total2.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         total2.disabled = true;
         btnRestart.disabled = false;
@@ -399,6 +405,9 @@ total2.addEventListener("click", () => {
 total3.addEventListener("click", () => {
     calculatePoints(selectDices,"total3");
     if(total3.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         total3.disabled = true;
         btnRestart.disabled = false;
@@ -408,6 +417,9 @@ total3.addEventListener("click", () => {
 total4.addEventListener("click", () => {
     calculatePoints(selectDices,"total4");
     if(total4.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         total4.disabled = true;
         btnRestart.disabled = false;
@@ -417,6 +429,9 @@ total4.addEventListener("click", () => {
 total5.addEventListener("click", () => {
     calculatePoints(selectDices,"total5");
     if(total5.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         total5.disabled = true;
         btnRestart.disabled = false;
@@ -426,6 +441,9 @@ total5.addEventListener("click", () => {
 total6.addEventListener("click", () => {
     calculatePoints(selectDices,"total6");
     if(total6.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         total6.disabled = true;
         btnRestart.disabled = false;
@@ -435,6 +453,9 @@ total6.addEventListener("click", () => {
 brelanClick.addEventListener("click",() => {
     calculatePoints(selectDices,"brelan");
     if(brelanClick.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         brelanClick.disabled = true;
         btnRestart.disabled = false;
@@ -444,6 +465,9 @@ brelanClick.addEventListener("click",() => {
 carreClick.addEventListener("click",() => {
     calculatePoints(selectDices,"carre");
     if(carreClick.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         carreClick.disabled = true;
         btnRestart.disabled = false;
@@ -453,6 +477,9 @@ carreClick.addEventListener("click",() => {
 fullClick.addEventListener("click",() => {
     calculatePoints(selectDices,"full");
     if(fullClick.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         fullClick.disabled = true;
         btnRestart.disabled = false;
@@ -462,6 +489,9 @@ fullClick.addEventListener("click",() => {
 petiteS.addEventListener("click", () => {
     calculatePoints(selectDices,"petiteS");
     if(petiteS.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         petiteS.disabled = true;
         btnRestart.disabled = false;
@@ -471,6 +501,9 @@ petiteS.addEventListener("click", () => {
 grandeS.addEventListener("click", () => {
     calculatePoints(selectDices,"grandeS");
     if(grandeS.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         grandeS.disabled = true;
         btnRestart.disabled = false;
@@ -480,6 +513,9 @@ grandeS.addEventListener("click", () => {
 yams.addEventListener("click", () => {
     calculatePoints(selectDices,"yams");
     if(yams.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         yams.disabled = true;
         btnRestart.disabled = false;
@@ -489,6 +525,9 @@ yams.addEventListener("click", () => {
 luck.addEventListener("click", () => {
     calculatePoints(selectDices,"luck");
     if(luck.innerHTML >= 0) {
+        dices = [];
+        selectDices = [];
+        displayRandomDicesNumber();
         totalSum();
         luck.disabled = true;
         btnRestart.disabled = false;
