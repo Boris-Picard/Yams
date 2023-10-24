@@ -57,6 +57,9 @@ header {
 .diceImg6 {
     width: 75px;
 }
+.diceImgBoard {
+    width: 55px;
+}
 
 .diceImgBoard1 {
     width: 55px;
@@ -78,9 +81,10 @@ header {
     width: 55px;
 }
 
-.active {
+
+/* .active {
     width: 40px;
-}
+} */
 
 @media all and (max-width: 600px) {
     .diceImg1 {
@@ -100,6 +104,7 @@ header {
     }
     .secondDiceContainer {
         position: relative;
+        margin-left: 20px;
         top: 0;
     }
 }
