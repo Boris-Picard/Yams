@@ -364,13 +364,13 @@ total6.addEventListener("click", () => {
     calculatePoints(selectDices,"total6");
 });
 brelanClick.addEventListener("click",() => {
-    calculatePoints(selectDices,"brelanClick");
+    calculatePoints(selectDices,"brelan");
 });
 carreClick.addEventListener("click",() => {
-    calculatePoints(selectDices,"carreClick");
+    calculatePoints(selectDices,"carre");
 });
 fullClick.addEventListener("click",() => {
-    calculatePoints(selectDices,"fullClick");
+    calculatePoints(selectDices,"full");
 });
 petiteS.addEventListener("click", () => {
     calculatePoints(selectDices,"petiteS");
