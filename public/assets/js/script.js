@@ -163,7 +163,10 @@ let calculatePoints=(selectDices,operation)=>{
                 const numberIsOk = selectDices[index];
             
                 // On utilise la méthode .filter pour rechercher combien de fois le nombre contenu dans numberIsOk est présent dans le tableau. .filter créer un nouveau tableau c'est sur lui que l'on effectue la recherche. Ce tableau est créer avec tous les éléments qui renvoi "true" lors .filter :
-                
+                for (let index = 0; index < selectDices.length; index++) {
+                    const numberIsOk = selectDices[index];
+                    console.log(numberIsOk);
+                }
                 const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
                 
                 // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
