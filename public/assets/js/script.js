@@ -18,7 +18,8 @@ const petiteS = document.getElementById("petiteS");
 const grandeS = document.getElementById("grandeS");
 const yams = document.getElementById("yams");
 const luck = document.getElementById("luck");
-
+let refSmallSuite = [1, 2, 3, 4, 5];
+let refLargeSuite = [2, 3, 4, 5, 6];
 let dices = [];
 let selectDices = [];
 const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
@@ -94,7 +95,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total1 = sum;
                     total1.innerHTML = points.total1;
                 };
-            };
+            } else {
+                points.total1 = 0;
+                total1.innerHTML = points.total1;
+            }
             break;
     // pour le cumul des 2
         case "total2":
@@ -105,7 +109,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total2 = sum2;
                     total2.innerHTML = points.total2;
                 };
-            };
+            } else {
+                points.total2 = 0;
+                total2.innerHTML = points.total2;
+            }
             break;
     // pour le cumul des 3
         case "total3":
@@ -116,7 +123,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total3 = sum3;
                     total3.innerHTML = points.total3;
                 };
-                };
+                } else {
+                    points.total3 = 0;
+                    total3.innerHTML = points.total3;
+                }
             break;
     // pour le cumul des 4
         case "total4":
@@ -127,7 +137,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total4 = sum4;
                     total4.innerHTML = points.total4;
                 };
-                };
+                } else {
+                    points.total4 = 0;
+                    total4.innerHTML = points.total4;
+                }
         break;
     // pour le cumul des 5
         case "total5":
@@ -138,7 +151,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total5 = sum5;
                     total5.innerHTML = points.total5;
                 };
-                };
+                } else {
+                    points.total5 = 0;
+                    total5.innerHTML = points.total5;
+                }
         break;
     // pour le cumul des 6
         case "total6":
@@ -149,7 +165,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.total6 = sum6;
                     total6.innerHTML = points.total6;
                 };
-                };
+                } else {
+                    points.total6 = 0;
+                    total6.innerHTML = points.total6;
+                }
         break;
         case "bonus":
         break;
@@ -163,7 +182,10 @@ let calculatePoints=(selectDices,operation)=>{
                     const resultBrelan = numberIsOk*3;
                     points.brelan = resultBrelan;
                     brelanClick.innerHTML = points.brelan;
-                };
+                } else {
+                    points.brelan = 0;
+                    brelanClick.innerHTML = points.brelan;
+                }
             };
         break;
         case "carre":
@@ -175,6 +197,9 @@ let calculatePoints=(selectDices,operation)=>{
                 if (squareHowMuchOfNumber >= 4) {
                     const square = squareIsOk * 4;
                     points.carre = square;
+                    carreClick.innerHTML = points.carre;
+                } else {
+                    points.carre = 0;
                     carreClick.innerHTML = points.carre;
                 }
             }
@@ -190,7 +215,10 @@ let calculatePoints=(selectDices,operation)=>{
                     points.full = 25;
                     fullClick.innerHTML = points.full;
                     fullClick.classList.add("disable");
-                };
+                } else {
+                    points.full = 0;
+                    fullClick.innerHTML = points.full;
+                }
                 if ( fullHowMuchOfNumber >= 3 && fullHowMuchOfNumber !=2 ) {
                     const brelan = [] ;
                     brelan[index] = fullIsOk ;
@@ -198,7 +226,10 @@ let calculatePoints=(selectDices,operation)=>{
                         points.full = 25;
                         fullClick.innerHTML = points.full;
                     });
-                };
+                } else {
+                    points.full = 0;
+                    fullClick.innerHTML = points.full;
+                }
             };
         break;
         case "petiteS":
@@ -206,7 +237,7 @@ let calculatePoints=(selectDices,operation)=>{
                 return a-b ;
             })
             let SmallSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refSmallSuite ) {
                 if (!selectDices.includes(value)) {
                     SmallSuiteIsOk = false ;
                     break ;
@@ -215,6 +246,9 @@ let calculatePoints=(selectDices,operation)=>{
             if (SmallSuiteIsOk) {
                 points.petiteS = 30;
                 petiteS.innerHTML = points.petiteS;
+            } else {
+                points.petiteS = 0;
+                petiteS.innerHTML = points.petiteS;
             }
         break;
         case "grandeS":
@@ -222,7 +256,7 @@ let calculatePoints=(selectDices,operation)=>{
                 return a-b ;
             })
             let LargeSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refLargeSuite) {
                 if (!selectDices.includes(value)) {
                     LargeSuiteIsOk = false ;
                     break ;
@@ -231,7 +265,9 @@ let calculatePoints=(selectDices,operation)=>{
             if (LargeSuiteIsOk) {
                 points.grandeS = 40;
                 grandeS.innerHTML = points.grandeS;
-                grandeS.classList.add("disable");
+            } else {
+                points.grandeS = 0;
+                grandeS.innerHTML = points.grandeS;
             }
         break;
         case "yams":
@@ -252,7 +288,10 @@ let calculatePoints=(selectDices,operation)=>{
                 if (counterOfYams[number] === 5) {
                     points.yams = 50;
                     yams.innerHTML = points.yams;
-                };
+                } else {
+                    points.yams = 0;
+                    yams.innerHTML = points.yams;
+                }
             };
         break;
         case"luck":
@@ -263,7 +302,10 @@ let calculatePoints=(selectDices,operation)=>{
             if(sumOfLuck) {
                 points.luck = sumOfLuck;
                 luck.innerHTML = points.luck;
-            };
+            } else {
+                points.luck = 0;
+                luck.innerHTML = points.luck;
+            }
         };
         break;
         default:
@@ -332,58 +374,128 @@ let getNumberActiveDice = () => {
 
 getNumberActiveDice()
 
-// vérifie les click sur une cellule et restart le compteur quand une cellule est pleine
-tableResultText.forEach((tr) => {
-    tr.addEventListener("click", () => {
-        if(tr.innerHTML) {
-            btnRestart.disabled = false;
-            roundCounter = 0;
-        };
-    });
-});
 
 
 // listener
-
 total1.addEventListener("click", () => {
     calculatePoints(selectDices,"total1");
+    if(total1.innerHTML >= 0) {
+        totalSum();
+        total1.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 total2.addEventListener("click", () => {
     calculatePoints(selectDices,"total2");
+    if(total2.innerHTML >= 0) {
+        totalSum();
+        total2.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
+    
 });
 total3.addEventListener("click", () => {
     calculatePoints(selectDices,"total3");
+    if(total3.innerHTML >= 0) {
+        totalSum();
+        total3.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 total4.addEventListener("click", () => {
     calculatePoints(selectDices,"total4");
+    if(total4.innerHTML >= 0) {
+        totalSum();
+        total4.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 total5.addEventListener("click", () => {
     calculatePoints(selectDices,"total5");
+    if(total5.innerHTML >= 0) {
+        totalSum();
+        total5.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 total6.addEventListener("click", () => {
     calculatePoints(selectDices,"total6");
+    if(total6.innerHTML >= 0) {
+        totalSum();
+        total6.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 brelanClick.addEventListener("click",() => {
     calculatePoints(selectDices,"brelan");
+    if(brelanClick.innerHTML >= 0) {
+        totalSum();
+        brelanClick.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 carreClick.addEventListener("click",() => {
     calculatePoints(selectDices,"carre");
+    if(carreClick.innerHTML >= 0) {
+        totalSum();
+        carreClick.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 fullClick.addEventListener("click",() => {
     calculatePoints(selectDices,"full");
+    if(fullClick.innerHTML >= 0) {
+        totalSum();
+        fullClick.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 petiteS.addEventListener("click", () => {
     calculatePoints(selectDices,"petiteS");
+    if(petiteS.innerHTML >= 0) {
+        totalSum();
+        petiteS.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 grandeS.addEventListener("click", () => {
     calculatePoints(selectDices,"grandeS");
+    if(grandeS.innerHTML >= 0) {
+        totalSum();
+        grandeS.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 yams.addEventListener("click", () => {
     calculatePoints(selectDices,"yams");
+    if(yams.innerHTML >= 0) {
+        totalSum();
+        yams.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
 luck.addEventListener("click", () => {
     calculatePoints(selectDices,"luck");
+    if(luck.innerHTML >= 0) {
+        totalSum();
+        luck.disabled = true;
+        btnRestart.disabled = false;
+        roundCounter = 0;
+    };
 });
+
 btnStart.addEventListener("click", displayRandomDicesNumber);
 btnRestart.addEventListener("click", counterClick);
 btnRestart.addEventListener("click", restartDices);
