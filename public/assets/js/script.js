@@ -112,12 +112,13 @@ let calculatePoints=(selectDices,operation)=>{
             const brelanClick = document.getElementById("brelan")
             for (let index = 0; index < selectDices.length; index++) {
                 const numberIsOk = selectDices[index];
-            
-        //         for (let index = 0; index < selectDices.length; index++) {
-        //             const numberIsOk = selectDices[index];
-        //             console.log(numberIsOk);
                 
-        //         const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
+            
+                for (let index = 0; index < selectDices.length; index++) {
+                    const numberIsOk = selectDices[index];
+                    console.log(numberIsOk);
+                }
+                const howMuchOfNumber = selectDices.filter(dice =>dice === numberIsOk).length;
                 
                 // Si le nombre présent dans numberIsOk est égale ou SUPERIEUR à trois on le stock dans un constante "Brelan". 
                 if (howMuchOfNumber >= 3) {
