@@ -17,7 +17,8 @@ const petiteS = document.getElementById("petiteS");
 const grandeS = document.getElementById("grandeS");
 const yams = document.getElementById("yams");
 const luck = document.getElementById("luck");
-
+let refSmallSuite = [1, 2, 3, 4, 5];
+let refLargeSuite = [2, 3, 4, 5, 6];
 let dices = [];
 let selectDices = [];
 const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
@@ -200,7 +201,7 @@ let calculatePoints=(selectDices,operation)=>{
                 return a-b ;
             })
             let SmallSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refSmallSuite ) {
                 if (!selectDices.includes(value)) {
                     SmallSuiteIsOk = false ;
                     break ;
@@ -216,7 +217,7 @@ let calculatePoints=(selectDices,operation)=>{
                 return a-b ;
             })
             let LargeSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refLargeSuite) {
                 if (!selectDices.includes(value)) {
                     LargeSuiteIsOk = false ;
                     break ;
@@ -327,20 +328,22 @@ let getNumberActiveDice = () => {
 getNumberActiveDice()
 
 // vérifie les click sur une cellule et restart le compteur quand une cellule est pleine
-tableResultText.forEach((tr) => {
-    tr.addEventListener("click", () => {
-        if(tr.innerHTML) {
-            btnRestart.disabled = false;
-            roundCounter = 0;
-        };
-    });
-});
+// tableResultText.forEach((tr) => {
+//     tr.addEventListener("click", () => {
+//         if(tr.innerHTML) {
+//             btnRestart.disabled = false;
+//             roundCounter = 0;
+//         };
+//     });
+// });
 
 
 // listener
-
 total1.addEventListener("click", () => {
     calculatePoints(selectDices,"total1");
+    if(total1 => 0) {
+        total1.disabled = true
+    }
 });
 total2.addEventListener("click", () => {
     calculatePoints(selectDices,"total2");
