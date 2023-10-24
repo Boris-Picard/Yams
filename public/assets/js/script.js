@@ -23,8 +23,6 @@ let dices = [];
 let selectDices = [];
 const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
 let roundCounter = 0;
-let refSmallSuite = [1, 2, 3, 4, 5] ;
-let refLargeSuite = [2, 3, 4, 5, 6] ;
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
     for (let index = 0; index < 5; index++) {
