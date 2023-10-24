@@ -29,6 +29,9 @@ header {
     background-color: #7F5539 !important;
     font-weight: bold !important;
 }
+.btn {
+    font-weight: bold !important;
+}
 
 .btnStart:hover {
     background-color: #DDB892 !important;
