@@ -5,6 +5,7 @@ const roundCounterHtml = document.querySelector(".roundCounterHtml");
 const totalEnding = document.getElementById("totalEnding");
 let dices = [];
 let selectDices = [];
+const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
 let roundCounter = 0;
 
 // fonction pour roll 5 dices avec un nombre aléatoire
@@ -20,16 +21,9 @@ let randomDicesNumber = () => {
 // fonction qui display les dices dans le board
 let displayRandomDicesNumber = () => {
     randomDicesNumber();
-    switchCheck();
     counterClick();
     for (let index = 0; index < 5 ; index++) {
         diceHtml[index].innerHTML = dices[index];
-        // randomDicesImg = `./public/assets/img/dice`+dices[index]+`.png`;
-        // diceImgBoard1.setAttribute("src", randomDicesImg);
-        // diceImgBoard2.setAttribute("src", randomDicesImg);
-        // diceImgBoard3.setAttribute("src", randomDicesImg);
-        // diceImgBoard4.setAttribute("src", randomDicesImg);
-        // diceImgBoard5.setAttribute("src", randomDicesImg);
         btnStart.classList.add("d-none");
         btnRestart.classList.remove("d-none");
     };
@@ -50,13 +44,30 @@ let restartDices = () => {
     return selectDices;
 };
 
+// tableau qui contienne les points au fur et a mesure
+let points = {
+    "total1": false,    
+    "total2": false,
+    "total3": false,
+    "total4": false,
+    "total5": false,
+    "total6": false,
+    "brelan": false,
+    "carre": false,
+    "full": false,
+    "petiteS": false,
+    "grandeS": false,
+    "yams": false,
+    "luck": false,
+};
+
 
 //fonction switch 
 let calculatePoints=(selectDices,operation)=>{
     switch(operation){
     // pour le cumul des 1
         case "total1":
-            let sum = 0
+            let sum = 0;
             let total1 = document.getElementById("total1")
             if (selectDices.includes(1)){
                 for (let index = 0; index < selectDices.length; index++) {
@@ -71,42 +82,80 @@ let calculatePoints=(selectDices,operation)=>{
             break;
     // pour le cumul des 2
         case "total2":
+            let sum2 = 0;
+            let total2 = document.getElementById("total2")
             if (selectDices.includes(2)){
-                console.log("présence de :" + 2);
-                let total2 = document.getElementById("total2")
-                } else {
-                console.log("absence de 2");
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum2 += selectDices[index];
+                    total2.addEventListener("click", () => {
+                        points.total2 = sum2;
+                        total2.innerHTML = points.total2;
+                        return points;
+                    });
+                };
+                };
             break;
     // pour le cumul des 3
         case "total3":
+            let sum3 = 0;
+            let total3 = document.getElementById("total3");
             if (selectDices.includes(3)){
-                console.log("présence de :" + 3);
-                } else {
-                console.log("absence de 3");
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum3 += selectDices[index];
+                    total3.addEventListener("click", () => {
+                        points.total3 = sum3;
+                        total3.innerHTML = points.total3;
+                        return points;
+                    });
+                };
+                };
             break;
     // pour le cumul des 4
         case "total4":
+            let sum4 = 0;
+            let total4 = document.getElementById("total4");
             if (selectDices.includes(4)){
-                console.log("présence de :" + 4);
-                } else {
-                console.log("absence de 4");
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum4 += selectDices[index];
+                    total4.addEventListener("click", () => {
+                        points.total4 = sum4;
+                        total4.innerHTML = points.total4;
+                        return points;
+                    });
+                };
+                };
         break;
     // pour le cumul des 5
         case "total5":
+            let sum5 = 0;
+            let total5 = document.getElementById("total5");
             if (selectDices.includes(5)){
-                console.log("présence de :" + 5);
-                } else {
-                console.log("absence de 5");
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum5 += selectDices[index];
+                    total5.addEventListener("click", () => {
+                        points.total5 = sum5;
+                        total5.innerHTML = points.total5;
+                        return points;
+                    });
+                };
+                };
         break;
     // pour le cumul des 6
         case "total6":
+            let sum6 = 0;
+            let total6 = document.getElementById("total6");
             if (selectDices.includes(6)){
-                } else {
-                }
+                for (let index = 0; index < selectDices.length; index++) {
+                    sum6 += selectDices[index];
+                    total6.addEventListener("click", () => {
+                        points.total6 = sum6;
+                        total6.innerHTML = points.total6;
+                        return points;
+                    });
+                };
+                };
+        break;
+        case "bonus":
         break;
         case "brelan": 
             const brelanClick = document.getElementById("brelan")
@@ -264,32 +313,13 @@ let calculatePoints=(selectDices,operation)=>{
 }
 
 
-
-const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
-
+/* fonction pour boucler dans le tableau operation et faire la comparaison correctement  
+avec la fonction qui contient le switch*/
 let switchCheck = () => {
     for (let index = 0; index < operation.length; index++) {
         calculatePoints(selectDices,operation[index]);
     };
 };
-
-
-let points = {
-    "total1": false,    
-    "total2": false,
-    "total3": false,
-    "total4": false,
-    "total5": false,
-    "total6": false,
-    "brelan": false,
-    "carre": false,
-    "full": false,
-    "petiteS": false,
-    "grandeS": false,
-    "yams": false,
-    "luck": false,
-}
-
 
 
 // fonction qui calcul le nombre de points total contenu dans points au fur et a mesure et affiche dans le tableau html
@@ -306,12 +336,6 @@ let totalSum = () => {
 let counterClick = () => {
     roundCounter++;
     roundCounterHtml.innerHTML = `${roundCounter}/3`
-    const tableResultText = document.querySelectorAll(".tableResultText");
-    tableResultText.forEach((tr) => {
-        if(tr.innerHTML) {
-            console.log(123);
-        }
-    })
     if(roundCounter === 3) {
         roundCounter = 0;
         // btnStart.classList.remove("d-none");
@@ -330,9 +354,8 @@ let getNumberActiveDice = () => {
             let clickArrayNumber = parseInt(dice.innerHTML);
             let indexInDices = dices.indexOf(clickArrayNumber);
             let indexInSelectDices = selectDices.indexOf(clickArrayNumber);
-            switchCheck();
-            totalSum();
             if(dice.classList.contains("active")) {
+                switchCheck();
                 calculatePoints(selectDices,operation);
                 dices.splice(indexInDices, 1);
                 selectDices.push(clickArrayNumber);
