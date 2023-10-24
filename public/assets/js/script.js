@@ -7,7 +7,8 @@ let dices = [];
 let selectDices = [];
 const operation = ["total1","total2", "total3", "total4", "total5", "total6", "full", "petiteS", "grandeS", "yams", "luck", "brelan", "carre"];
 let roundCounter = 0;
-
+let refSmallSuite = [1, 2, 3, 4, 5] ;
+let refLargeSuite = [2, 3, 4, 5, 6] ;
 // fonction pour roll 5 dices avec un nombre aléatoire
 let randomDicesNumber = () => {
     for (let index = 0; index < 5; index++) {
@@ -227,11 +228,13 @@ let calculatePoints=(selectDices,operation)=>{
         break;
         case "petiteS":
             const petiteS = document.getElementById("petiteS")
+         //  .sort permet de classer les nombres par ordre croissant :
+        // Autre version sans les {} : selectDices.sort((a, b) => a - b) ;
             selectDices.sort(function(a,b) {
                 return a-b ;
             })
             let SmallSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refSmallSuite ) {
                 if (!selectDices.includes(value)) {
                     SmallSuiteIsOk = false ;
                     break ;
@@ -247,11 +250,12 @@ let calculatePoints=(selectDices,operation)=>{
         break;
         case "grandeS":
             const grandeS = document.getElementById("grandeS")
+        
             selectDices.sort(function(a,b) {
                 return a-b ;
             })
             let LargeSuiteIsOk = true;
-            for (const value of selectDices) {
+            for (const value of refLargeSuite) {
                 if (!selectDices.includes(value)) {
                     LargeSuiteIsOk = false ;
                     break ;
@@ -298,8 +302,8 @@ let calculatePoints=(selectDices,operation)=>{
         let sumOfLuck = 0;
         const luck = document.getElementById("luck");
         for (const dice of selectDices) {
-            // sumOfLuck += dice;
-            sumOfLuck = sumOfLuck + dice ;
+            sumOfLuck += dice;
+            // sumOfLuck = sumOfLuck + dice ;
             if(sumOfLuck) {
                 luck.addEventListener("click", () => {
                     points.luck = sumOfLuck;
